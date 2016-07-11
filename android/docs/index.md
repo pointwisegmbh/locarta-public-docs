@@ -115,7 +115,7 @@ Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd lik
 | Dependency | Version
 | ------------- |  -------------
 |com.google.android.gms:play-services-location | 9.2.0
-|com.android.support:appcompat-v7:23.1.1 | 24.0.0
+|com.android.support:appcompat-v7 | 24.0.0
 |com.google.code.gson:gson | 2.7
 |com.squareup.retrofit:converter-gson | 2.0.0-beta2
 |de.greenrobot:eventbus| 3.0.0
