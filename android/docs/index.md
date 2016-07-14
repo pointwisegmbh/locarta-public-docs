@@ -1,8 +1,8 @@
 # Locarta Android SDK
 
-| Latest Version | Size | Release Date
+| Latest Version | Size | Minimal Android API verison |Release Date
 | ------------- |  ------------- | ------------- 
-| 1.0.3 | 172 kb |07/06/2016
+| 111.07f5165 | 352 KB| 15 (4.0.3  Ice Cream Sandwich) |14/07/2016
 
 ## Setup
 ------
@@ -13,7 +13,7 @@ To add the Locarta Sdk dependency, open a build.gradle of your project and updat
 ``` gradle
      repositories {
      // ... other project repositories
-     maven { url "http://repo.pointwise.co/nexus/content/repositories/pointwise" }
+     maven { url "https://repo.pointwise.co/nexus/content/repositories/pointwise" }
      // Repository will be provided separately 
      }
      // ...
@@ -115,6 +115,7 @@ Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd lik
 | Dependency | Version
 | ------------- |  -------------
 |com.google.android.gms:play-services-location | 9.2.0
+|com.google.android.gms:play-services-gcm | 9.2.0
 |com.android.support:appcompat-v7 | 24.0.0
 |com.google.code.gson:gson | 2.7
 |com.squareup.retrofit:converter-gson | 2.0.0-beta2
@@ -122,6 +123,7 @@ Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd lik
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf|2.6.1
+|javax.annotation:jsr250-api|1.0
 
 ------
 
