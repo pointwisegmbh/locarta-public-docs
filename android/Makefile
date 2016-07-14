@@ -17,7 +17,7 @@ tag:
 	$(DOCKER) tag $(NAME) $(REPO)/$(NAME):latest
 	$(DOCKER) tag $(NAME) $(REPO)/$(NAME):$(TAG)
 run:
-	$(DOCKER) run --name $(NAME) -d -p 8080:80 $(NAME)
+	$(DOCKER) rm -f $(NAME) && $(DOCKER) run --name $(NAME) -d -p 8080:80 $(NAME)
 
 compile:
 	mkdocs build --clean

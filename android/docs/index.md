@@ -1,8 +1,8 @@
 # Locarta Android SDK
 
-| Latest Version | Size | Minimal Android API verison |Release Date
-| ------------- |  ------------- | ------------- 
-| 111.07f5165 | 352 KB| 15 (4.0.3  Ice Cream Sandwich) |14/07/2016
+| Latest Version | Size | Minimal Android API verison | Release Date
+| ------------- |  ------------- | -------------  | ------------- 
+| 111.07f5165 | 352 KB| 15 (4.0.3  Ice Cream Sandwich) |07/07/2016
 
 ## Setup
 ------
@@ -10,7 +10,7 @@
 ### Declare dependencies
 
 To add the Locarta Sdk dependency, open a build.gradle of your project and update the repositories and dependencies blocks as follows:
-``` gradle
+```gradle
      repositories {
      // ... other project repositories
      maven { url "https://repo.pointwise.co/nexus/content/repositories/pointwise" }
@@ -32,10 +32,10 @@ Sync build.gradle, rebuild your project and import `co.locarta.sdk.LocartaSDK` i
 ### Set Publisher Key
 
 Add <meta-data> tag to AndroidManifest.xml of your project
-``` xml
+```xml
     <application>
-        // ... other content
-        <meta-data android:name="co.locarta.sdk.pid" android:value="<YOUR PUBLISHER KEY>"/>
+        <!-- other content -->
+        <meta-data android:name="co.locarta.sdk.pid" android:value="<YOUR PUBLISHER KEY>"/>        
     </application>
 ```
 where PublisherKey is your Publisher Key.
@@ -61,7 +61,7 @@ You need to initialise Locarta SDK only once on the startup
 User has to opt-in into marketing research program for the SDK to start working.
 
 This can be done wither via embed dialog:
-``` java
+```java
     // Put this code somewhere in the main activities
     LocartaSdk.showAgreementDialog(this);
 ```    
@@ -92,13 +92,6 @@ The set of minimal permissions embedded in the Locarta SDK:
 |android.permission.ACCESS_NETWORK_STATE | View Network Connections| Netzwerkverbindungen abrufen
 |android.permission.ACCESS_WIFI_STATE | View Wifi Connections | WLAN-Verbindungen abrufen
 
-Optional permissions that could  declared on the host application level:
-
-| Permission Name | Plain English Name in App | Plain German Name in App
-| ------------- | ------------- | ------------- 
-|android.permission.RECEIVE_BOOT_COMPLETED| Run At Startup | Beim Anschalten Starten
-|com.google.android.gms.permission.ACTIVITY_RECOGNITION| Activity Recognition | Aktivitätserkennung
-
 
 ### Proguard
 
@@ -106,7 +99,9 @@ We already configured proguard rules for the Locarta SDK. No addtional steps has
 
 ### Performance impact
 
-We expect a battery impact of roughly 2% (adjustable)
+We expect a battery impact of roughly 2% (adjustable).
+
+Normally we use about 1MB/week of mobile data, but this also depends on how often you connect to wifi.
 
 ### 3rd party dependencies 
 
