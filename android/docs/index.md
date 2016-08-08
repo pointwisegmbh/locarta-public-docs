@@ -2,14 +2,14 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 111.07f5165 | 352 KB| 15 (4.0.3  Ice Cream Sandwich) |07/07/2016
+| 143.be90ae4 | 400 KB| 9 (2.3  Gingerbeard) |03/08/2016
 
 ## Setup
 ------
 
 ### Declare dependencies
 
-To add the Locarta Sdk dependency, open a build.gradle of your project and update the repositories and dependencies blocks as follows:
+To add the Locarta Sdk dependency open `build.gradle` file of your project and update the repositories and dependencies blocks as follows:
 ```gradle
      repositories {
      // ... other project repositories
@@ -60,7 +60,7 @@ You need to initialise Locarta SDK only once on the startup
 
 User has to opt-in into marketing research program for the SDK to start working.
 
-This can be done wither via embed dialog:
+This can be done either via embed dialog:
 ```java
     // Put this code somewhere in the main activities
     LocartaSdk.showAgreementDialog(this);
@@ -73,7 +73,12 @@ Or it can be done via API call if a host application has own accept dialog or co
 If you want to check the status of accepted terms, call:
 ``` java
     // The call returns true or false if user accepted terms or not
-    LocartaSDK.getTermsAccepted();
+    LocartaSDK.getTermsAccepted();        
+```
+
+If you want to stop SDK for whatever reason:
+```java
+   LocartaSdk.stop(context);
 ```
 
 ## Integration information 
@@ -109,16 +114,49 @@ Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd lik
 
 | Dependency | Version
 | ------------- |  -------------
-|com.google.android.gms:play-services-location | 9.2.0
-|com.google.android.gms:play-services-gcm | 9.2.0
-|com.android.support:appcompat-v7 | 24.0.0
+|com.google.android.gms:play-services-location | 9.4.0
+|com.google.android.gms:play-services-gcm | 9.4.0
+|com.android.support:appcompat-v7 | 24.1.1
 |com.google.code.gson:gson | 2.7
-|com.squareup.retrofit:converter-gson | 2.0.0-beta2
+|com.squareup.retrofit2:retrofit| 2.1.0
+|com.squareup.retrofit2:converter-gson | 2.1.0
 |de.greenrobot:eventbus| 3.0.0
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf|2.6.1
-|javax.annotation:jsr250-api|1.0
 
 ------
+
+### Troubleshooting
+
+#### Proguard 
+
+If you see the message: _Can't find referenced class from the SDK  
+
+Add these lines to your proguard configuration: 
+
+```
+-dontwarn co.pointwise.proto.JournalProto$.**
+-dontwarn com.google.common.base.Function
+-dontwarn com.google.common.collect.Lists
+```
+
+
+#### Downgrading min. skd version to API v7.
+
+Technically SDK minimum version is 7 already.
+
+But it depends on Google Play services with minimum version 9. 
+
+If you get an error saying: 
+```
+Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary="com.google.android.gms" to force usage
+```
+
+Than add this line to the manifest of your applicaiton: 
+
+```xml
+<uses-sdk tools:overrideLibrary="com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid"/>
+```
+
 

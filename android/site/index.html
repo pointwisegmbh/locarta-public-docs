@@ -83,17 +83,17 @@
 </thead>
 <tbody>
 <tr>
-<td>111.07f5165</td>
-<td>352 KB</td>
-<td>15 (4.0.3  Ice Cream Sandwich)</td>
-<td>07/07/2016</td>
+<td>143.be90ae4</td>
+<td>400 KB</td>
+<td>9 (2.3  Gingerbeard)</td>
+<td>03/08/2016</td>
 </tr>
 </tbody>
 </table>
 <h2 id="setup">Setup</h2>
 <hr />
 <h3 id="declare-dependencies">Declare dependencies</h3>
-<p>To add the Locarta Sdk dependency, open a build.gradle of your project and update the repositories and dependencies blocks as follows:</p>
+<p>To add the Locarta Sdk dependency open <code>build.gradle</code> file of your project and update the repositories and dependencies blocks as follows:</p>
 <pre><code class="gradle">     repositories {
      // ... other project repositories
      maven { url &quot;https://repo.pointwise.co/nexus/content/repositories/pointwise&quot; }
@@ -135,7 +135,7 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 
 <h3 id="user-opt-in">User opt-in</h3>
 <p>User has to opt-in into marketing research program for the SDK to start working.</p>
-<p>This can be done wither via embed dialog:</p>
+<p>This can be done either via embed dialog:</p>
 <pre><code class="java">    // Put this code somewhere in the main activities
     LocartaSdk.showAgreementDialog(this);
 </code></pre>
@@ -146,7 +146,11 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 
 <p>If you want to check the status of accepted terms, call:</p>
 <pre><code class="java">    // The call returns true or false if user accepted terms or not
-    LocartaSDK.getTermsAccepted();
+    LocartaSDK.getTermsAccepted();        
+</code></pre>
+
+<p>If you want to stop SDK for whatever reason:</p>
+<pre><code class="java">   LocartaSdk.stop(context);
 </code></pre>
 
 <h2 id="integration-information">Integration information</h2>
@@ -206,23 +210,27 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 <tbody>
 <tr>
 <td>com.google.android.gms:play-services-location</td>
-<td>9.2.0</td>
+<td>9.4.0</td>
 </tr>
 <tr>
 <td>com.google.android.gms:play-services-gcm</td>
-<td>9.2.0</td>
+<td>9.4.0</td>
 </tr>
 <tr>
 <td>com.android.support:appcompat-v7</td>
-<td>24.0.0</td>
+<td>24.1.1</td>
 </tr>
 <tr>
 <td>com.google.code.gson:gson</td>
 <td>2.7</td>
 </tr>
 <tr>
-<td>com.squareup.retrofit:converter-gson</td>
-<td>2.0.0-beta2</td>
+<td>com.squareup.retrofit2:retrofit</td>
+<td>2.1.0</td>
+</tr>
+<tr>
+<td>com.squareup.retrofit2:converter-gson</td>
+<td>2.1.0</td>
 </tr>
 <tr>
 <td>de.greenrobot:eventbus</td>
@@ -240,13 +248,28 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 <td>com.google.protobuf</td>
 <td>2.6.1</td>
 </tr>
-<tr>
-<td>javax.annotation:jsr250-api</td>
-<td>1.0</td>
-</tr>
 </tbody>
 </table>
-<hr /></div>
+<hr />
+<h3 id="troubleshooting">Troubleshooting</h3>
+<h4 id="proguard_1">Proguard</h4>
+<p>If you see the message: _Can't find referenced class from the SDK  </p>
+<p>Add these lines to your proguard configuration: </p>
+<pre><code>-dontwarn co.pointwise.proto.JournalProto$.**
+-dontwarn com.google.common.base.Function
+-dontwarn com.google.common.collect.Lists
+</code></pre>
+
+<h4 id="downgrading-min-skd-version-to-api-v7">Downgrading min. skd version to API v7.</h4>
+<p>Technically SDK minimum version is 7 already.</p>
+<p>But it depends on Google Play services with minimum version 9. </p>
+<p>If you get an error saying: </p>
+<pre><code>Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary=&quot;com.google.android.gms&quot; to force usage
+</code></pre>
+
+<p>Than add this line to the manifest of your applicaiton: </p>
+<pre><code class="xml">&lt;uses-sdk tools:overrideLibrary=&quot;com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid&quot;/&gt;
+</code></pre></div>
             
         </div>
 
@@ -293,5 +316,5 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-07-14 13:23:05.716487
+Build Date UTC : 2016-08-08 15:12:39.232382
 -->
