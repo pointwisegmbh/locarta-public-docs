@@ -12,9 +12,9 @@
 Open the `build.gradle` file of your project and update the repository and dependency blocks as follows:
 ```gradle
      repositories {
-     // ... other project repositories
-     maven { url "https://repo.pointwise.co/nexus/content/repositories/pointwise" }
-     // Repository will be provided separately 
+        // ... other project repositories
+        maven { url "https://repo.pointwise.co/nexus/content/repositories/pointwise" }
+        // Repository will be provided separately 
      }
      // ...
  	 dependencies {
