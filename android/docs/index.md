@@ -85,7 +85,7 @@ If you want to stop SDK for some reason:
 
 ------
 
-By default the host app __should not__ be setting any additional permissions in it's manifest.
+By default the host app __should not__ be setting any additional permissions in its manifest.
 
 The set of minimal permissions embedded in the Locarta SDK is:
 
@@ -100,7 +100,7 @@ The set of minimal permissions embedded in the Locarta SDK is:
 
 ### Proguard
 
-Proguard rules are already configured for the Locarta SDK. No addtional steps need to be taken in your application.
+Proguard rules are already configured for the Locarta SDK. No additional steps need to be taken in your application.
 
 ### Performance Impact
 
