@@ -131,7 +131,7 @@ As the Locarta SDK should be implemented as a transitive @aar dependency, here a
 
 #### Proguard 
 
-If you see the message: _Can't find referenced class from the SDK  
+If you see the message: `Can't find referenced class from the SDK` 
 
 Add these lines to your proguard configuration: 
 
@@ -142,7 +142,7 @@ Add these lines to your proguard configuration:
 ```
 
 
-#### Downgrading min SDK version to API v7.
+#### Downgrading min SDK version to API v7
 
 Technically the minimum API version for the SDK is already v7, but it depends on Google Play Services, which requires minimum API v9. 
 
@@ -151,7 +151,7 @@ If you get an error saying:
 Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary="com.google.android.gms" to force usage
 ```
 
-Than add this line to the manifest of your applicaiton: 
+Than add this line to the manifest of your application: 
 
 ```xml
 <uses-sdk tools:overrideLibrary="com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid"/>
