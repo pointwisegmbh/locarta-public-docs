@@ -7,7 +7,7 @@
 ## Setup
 ------
 
-### Declare dependencies
+### 1) Declare dependencies
 
 Open the `build.gradle` file of your project and update the repository and dependency blocks as follows:
 ```gradle
@@ -29,7 +29,7 @@ where `LOCARTA_SDK_VERSION` is the SDK version number you wish to use.
 Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
 
 
-### Set Publisher Key
+### 2) Set Publisher Key
 
 Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```xml
@@ -56,7 +56,7 @@ You need to initialise the Locarta SDK only once – on app start:
     }
 ```
 
-### User Opt-In
+### 3) Obtain User Opt-In
 
 User must opt in to Locarta's market research programme for the SDK to start working. This can be done by either:
 
