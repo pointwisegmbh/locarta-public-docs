@@ -131,9 +131,7 @@ As the Locarta SDK should be implemented as a transitive @aar dependency, here a
 
 #### Proguard 
 
-If you see the message: `Can't find referenced class from the SDK` 
-
-Add these lines to your proguard configuration: 
+If you see the message: `Can't find referenced class from the SDK`, add these lines to your proguard configuration: 
 
 ```
 -dontwarn co.pointwise.proto.JournalProto$.**
@@ -144,7 +142,7 @@ Add these lines to your proguard configuration:
 
 #### Downgrading min SDK version to API v7
 
-Technically the minimum API version for the SDK is already v7, but it depends on Google Play Services, which requires minimum API v9. 
+Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9. 
 
 If you get an error saying: 
 ```
