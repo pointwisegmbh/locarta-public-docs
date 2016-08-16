@@ -40,7 +40,7 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```
 where `YOUR_PUBLISHER_KEY` is your Locarta publisher key.
 
-#### Initialise SDK
+### 3) Initialise SDK on App Start
 
 You need to initialise the Locarta SDK only once – on app start:
 ``` java
@@ -56,7 +56,7 @@ You need to initialise the Locarta SDK only once – on app start:
     }
 ```
 
-### 3) Obtain User Opt-In
+### 4) Obtain User Opt-In
 
 User must opt in to Locarta's market research programme for the SDK to start working. This can be done by either:
 
