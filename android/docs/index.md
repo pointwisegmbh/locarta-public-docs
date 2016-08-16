@@ -2,14 +2,14 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 143.be90ae4 | 400 KB| 9 (2.3  Gingerbeard) |03/08/2016
+| 143.be90ae4 | 400 KB| 9 (2.3  Gingerbread) |03/08/2016
 
 ## Setup
 ------
 
 ### Declare dependencies
 
-To add the Locarta Sdk dependency open `build.gradle` file of your project and update the repositories and dependencies blocks as follows:
+Open the `build.gradle` file of your project and update the repository and dependency blocks as follows:
 ```gradle
      repositories {
      // ... other project repositories
@@ -19,30 +19,30 @@ To add the Locarta Sdk dependency open `build.gradle` file of your project and u
      // ...
  	 dependencies {
         // ... other project dependencies
-        compile ("co.locarta.sdk:<LocartaSdkVersion>:pubProd@aar") {
+        compile ("co.locarta.sdk:LOCARTA_SDK_VERSION:pubProd@aar") {
             transitive = true;
         }
      }
 ```     
 
-where "LocartaSdkVersion" is actual Locarta SDK version
-Sync build.gradle, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
+where `LOCARTA_SDK_VERSION` is the SDK version number you wish to use.
+Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
 
 
 ### Set Publisher Key
 
-Add <meta-data> tag to AndroidManifest.xml of your project
+Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```xml
     <application>
         <!-- other content -->
-        <meta-data android:name="co.locarta.sdk.pid" android:value="<YOUR PUBLISHER KEY>"/>        
+        <meta-data android:name="co.locarta.sdk.pid" android:value="YOUR_PUBLISHER_KEY"/>        
     </application>
 ```
-where PublisherKey is your Publisher Key.
+where `YOUR_PUBLISHER_KEY` is your Locarta publisher key.
 
 #### Initialise SDK
 
-You need to initialise Locarta SDK only once on the startup
+You need to initialise the Locarta SDK only once – on app start:
 ``` java
     // Add this line to the header of your file
     import co.locarta.sdk.LocartaSdk;
@@ -56,38 +56,38 @@ You need to initialise Locarta SDK only once on the startup
     }
 ```
 
-### User opt-in
+### User Opt-In
 
-User has to opt-in into marketing research program for the SDK to start working.
+User must opt in to Locarta's market research programme for the SDK to start working. This can be done by either:
 
-This can be done either via embed dialog:
+a) Via the default Locarta agreement dialog:
 ```java
     // Put this code somewhere in the main activities
     LocartaSdk.showAgreementDialog(this);
 ```    
-Or it can be done via API call if a host application has own accept dialog or compliant terms and conditions:
+b) Via API call if your application has own agreement dialog or compliant terms and conditions:
 ``` java
     LocartaSDK.setTermsAccepted(true);
 ```    
     
-If you want to check the status of accepted terms, call:
+If you want to check whether the user has opted in, call:
 ``` java
     // The call returns true or false if user accepted terms or not
     LocartaSDK.getTermsAccepted();        
 ```
 
-If you want to stop SDK for whatever reason:
+If you want to stop SDK for some reason:
 ```java
    LocartaSdk.stop(context);
 ```
 
-## Integration information 
+## Integration Information 
 
 ------
 
 By default the host app __should not__ be setting any additional permissions in it's manifest.
 
-The set of minimal permissions embedded in the Locarta SDK:
+The set of minimal permissions embedded in the Locarta SDK is:
 
 | Permission Name | Plain English Name in App | Plain German Name in App
 | ------------- | ------------- | ------------- 
@@ -100,17 +100,17 @@ The set of minimal permissions embedded in the Locarta SDK:
 
 ### Proguard
 
-We already configured proguard rules for the Locarta SDK. No addtional steps has to be done in the host application
+Proguard rules are already configured for the Locarta SDK. No addtional steps need to be taken in your application.
 
-### Performance impact
+### Performance Impact
 
-We expect a battery impact of roughly 2% (adjustable).
+We expect a battery impact of roughly 2-3%.
 
-Normally we use about 1MB/week of mobile data, but this also depends on how often you connect to wifi.
+Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).
 
-### 3rd party dependencies 
+### 3rd-Party Dependencies 
 
-Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd like to provide a list of 3rd party dependencies we use.
+As the Locarta SDK should be implemented as a transitive @aar dependency, here are the 3rd party dependencies we use:
 
 | Dependency | Version
 | ------------- |  -------------
@@ -142,11 +142,9 @@ Add these lines to your proguard configuration:
 ```
 
 
-#### Downgrading min. skd version to API v7.
+#### Downgrading min SDK version to API v7.
 
-Technically SDK minimum version is 7 already.
-
-But it depends on Google Play services with minimum version 9. 
+Technically the minimum API version for the SDK is already v7, but it depends on Google Play Services, which requires minimum API v9. 
 
 If you get an error saying: 
 ```
