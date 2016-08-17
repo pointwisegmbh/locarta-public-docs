@@ -64,7 +64,7 @@
         
             <li><a href="#setup">Setup</a></li>
         
-            <li><a href="#integration-information">Integration information</a></li>
+            <li><a href="#integration-information">Integration Information</a></li>
         
     
     </ul>
@@ -85,42 +85,42 @@
 <tr>
 <td>143.be90ae4</td>
 <td>400 KB</td>
-<td>9 (2.3  Gingerbeard)</td>
+<td>9 (2.3  Gingerbread)</td>
 <td>03/08/2016</td>
 </tr>
 </tbody>
 </table>
 <h2 id="setup">Setup</h2>
 <hr />
-<h3 id="declare-dependencies">Declare dependencies</h3>
-<p>To add the Locarta Sdk dependency open <code>build.gradle</code> file of your project and update the repositories and dependencies blocks as follows:</p>
+<h3 id="1-declare-dependencies">1) Declare dependencies</h3>
+<p>Open the <code>build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
 <pre><code class="gradle">     repositories {
-     // ... other project repositories
-     maven { url &quot;https://repo.pointwise.co/nexus/content/repositories/pointwise&quot; }
-     // Repository will be provided separately 
+        // ... other project repositories
+        maven { url &quot;https://repo.pointwise.co/nexus/content/repositories/pointwise&quot; }
+        // Repository will be provided separately 
      }
      // ...
      dependencies {
         // ... other project dependencies
-        compile (&quot;co.locarta.sdk:&lt;LocartaSdkVersion&gt;:pubProd@aar&quot;) {
+        compile (&quot;co.locarta.sdk:LOCARTA_SDK_VERSION:pubProd@aar&quot;) {
             transitive = true;
         }
      }
 </code></pre>
 
-<p>where "LocartaSdkVersion" is actual Locarta SDK version
-Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaSDK</code> into your app.</p>
-<h3 id="set-publisher-key">Set Publisher Key</h3>
-<p>Add <meta-data> tag to AndroidManifest.xml of your project</p>
+<p>where <code>LOCARTA_SDK_VERSION</code> is the SDK version number you wish to use.
+Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta.sdk.LocartaSDK</code> into your app.</p>
+<h3 id="2-set-publisher-key">2) Set Publisher Key</h3>
+<p>Add a <code>&lt;meta-data&gt;</code> tag to the <code>AndroidManifest.xml</code> of your project:</p>
 <pre><code class="xml">    &lt;application&gt;
         &lt;!-- other content --&gt;
-        &lt;meta-data android:name=&quot;co.locarta.sdk.pid&quot; android:value=&quot;&lt;YOUR PUBLISHER KEY&gt;&quot;/&gt;        
+        &lt;meta-data android:name=&quot;co.locarta.sdk.pid&quot; android:value=&quot;YOUR_PUBLISHER_KEY&quot;/&gt;        
     &lt;/application&gt;
 </code></pre>
 
-<p>where PublisherKey is your Publisher Key.</p>
-<h4 id="initialise-sdk">Initialise SDK</h4>
-<p>You need to initialise Locarta SDK only once on the startup</p>
+<p>where <code>YOUR_PUBLISHER_KEY</code> is your Locarta publisher key.</p>
+<h3 id="3-initialise-sdk-on-app-start">3) Initialise SDK on App Start</h3>
+<p>You need to initialise the Locarta SDK only once – on app start:</p>
 <pre><code class="java">    // Add this line to the header of your file
     import co.locarta.sdk.LocartaSdk;
     public class SdkDemoApplication extends Application {
@@ -133,30 +133,30 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
     }
 </code></pre>
 
-<h3 id="user-opt-in">User opt-in</h3>
-<p>User has to opt-in into marketing research program for the SDK to start working.</p>
-<p>This can be done either via embed dialog:</p>
+<h3 id="4-obtain-user-opt-in">4) Obtain User Opt-In</h3>
+<p>User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:</p>
+<p>a) Via the default Locarta agreement dialog:</p>
 <pre><code class="java">    // Put this code somewhere in the main activities
     LocartaSdk.showAgreementDialog(this);
 </code></pre>
 
-<p>Or it can be done via API call if a host application has own accept dialog or compliant terms and conditions:</p>
+<p>b) Via an API call (if your application has own agreement dialog or compliant terms and conditions):</p>
 <pre><code class="java">    LocartaSDK.setTermsAccepted(true);
 </code></pre>
 
-<p>If you want to check the status of accepted terms, call:</p>
+<p>If you want to check whether the user has opted in, call:</p>
 <pre><code class="java">    // The call returns true or false if user accepted terms or not
     LocartaSDK.getTermsAccepted();        
 </code></pre>
 
-<p>If you want to stop SDK for whatever reason:</p>
+<p>If you want to stop SDK for some reason:</p>
 <pre><code class="java">   LocartaSdk.stop(context);
 </code></pre>
 
-<h2 id="integration-information">Integration information</h2>
+<h2 id="integration-information">Integration Information</h2>
 <hr />
-<p>By default the host app <strong>should not</strong> be setting any additional permissions in it's manifest.</p>
-<p>The set of minimal permissions embedded in the Locarta SDK:</p>
+<p>By default the host app <strong>should not</strong> be setting any additional permissions in its manifest.</p>
+<p>The set of minimal permissions embedded in the Locarta SDK is:</p>
 <table>
 <thead>
 <tr>
@@ -194,12 +194,12 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 </tbody>
 </table>
 <h3 id="proguard">Proguard</h3>
-<p>We already configured proguard rules for the Locarta SDK. No addtional steps has to be done in the host application</p>
-<h3 id="performance-impact">Performance impact</h3>
-<p>We expect a battery impact of roughly 2% (adjustable).</p>
-<p>Normally we use about 1MB/week of mobile data, but this also depends on how often you connect to wifi.</p>
-<h3 id="3rd-party-dependencies">3rd party dependencies</h3>
-<p>Since we ask you to integrate Locarta SDK as transitive @aar dependeny, we'd like to provide a list of 3rd party dependencies we use.</p>
+<p>Proguard rules are already configured for the Locarta SDK. No additional steps need to be taken in your application.</p>
+<h3 id="performance-impact">Performance Impact</h3>
+<p>We expect a battery impact of roughly 2-3%.</p>
+<p>Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).</p>
+<h3 id="3rd-party-dependencies">3rd-Party Dependencies</h3>
+<p>As the Locarta SDK should be implemented as a transitive @aar dependency, here are the 3rd party dependencies we use:</p>
 <table>
 <thead>
 <tr>
@@ -253,21 +253,19 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 <hr />
 <h3 id="troubleshooting">Troubleshooting</h3>
 <h4 id="proguard_1">Proguard</h4>
-<p>If you see the message: _Can't find referenced class from the SDK  </p>
-<p>Add these lines to your proguard configuration: </p>
+<p>If you see the message: <code>Can't find referenced class from the SDK</code>, add these lines to your proguard configuration: </p>
 <pre><code>-dontwarn co.pointwise.proto.JournalProto$.**
 -dontwarn com.google.common.base.Function
 -dontwarn com.google.common.collect.Lists
 </code></pre>
 
-<h4 id="downgrading-min-skd-version-to-api-v7">Downgrading min. skd version to API v7.</h4>
-<p>Technically SDK minimum version is 7 already.</p>
-<p>But it depends on Google Play services with minimum version 9. </p>
+<h4 id="downgrading-min-sdk-version-to-api-v7">Downgrading min SDK version to API v7</h4>
+<p>Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9. </p>
 <p>If you get an error saying: </p>
 <pre><code>Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary=&quot;com.google.android.gms&quot; to force usage
 </code></pre>
 
-<p>Than add this line to the manifest of your applicaiton: </p>
+<p>Than add this line to the manifest of your application: </p>
 <pre><code class="xml">&lt;uses-sdk tools:overrideLibrary=&quot;com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid&quot;/&gt;
 </code></pre></div>
             
@@ -316,5 +314,5 @@ Sync build.gradle, rebuild your project and import <code>co.locarta.sdk.LocartaS
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-08 15:12:39.232382
+Build Date UTC : 2016-08-17 08:31:48.863440
 -->
