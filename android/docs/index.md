@@ -110,7 +110,7 @@ Normally we use about 1MB/week of mobile data (depending on how long the phone i
 
 ### 3rd-Party Dependencies 
 
-As the Locarta SDK should be implemented as a transitive @aar dependency, here are the 3rd party dependencies we use:
+The Locarta SDK should be implemented as a transitive @aar dependency. These are the 3rd-party dependencies it uses:
 
 | Dependency | Version
 | ------------- |  -------------
@@ -149,7 +149,7 @@ If you get an error saying:
 Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary="com.google.android.gms" to force usage
 ```
 
-Than add this line to the manifest of your application: 
+Then add this line to the manifest of your application: 
 
 ```xml
 <uses-sdk tools:overrideLibrary="com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid"/>
