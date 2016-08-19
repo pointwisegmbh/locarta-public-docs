@@ -199,7 +199,7 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <p>We expect a battery impact of roughly 2-3%.</p>
 <p>Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).</p>
 <h3 id="3rd-party-dependencies">3rd-Party Dependencies</h3>
-<p>As the Locarta SDK should be implemented as a transitive @aar dependency, here are the 3rd party dependencies we use:</p>
+<p>The Locarta SDK should be implemented as a transitive @aar dependency. These are the 3rd-party dependencies it uses:</p>
 <table>
 <thead>
 <tr>
@@ -265,7 +265,7 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <pre><code>Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary=&quot;com.google.android.gms&quot; to force usage
 </code></pre>
 
-<p>Than add this line to the manifest of your application: </p>
+<p>Then add this line to the manifest of your application: </p>
 <pre><code class="xml">&lt;uses-sdk tools:overrideLibrary=&quot;com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid&quot;/&gt;
 </code></pre></div>
             
@@ -314,5 +314,5 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-17 08:31:48.863440
+Build Date UTC : 2016-08-19 10:44:27.937696
 -->
