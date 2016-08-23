@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 143.be90ae4 | 400 KB| 9 (2.3  Gingerbread) |03/08/2016
+| 1.0.5 | 415 KB| 7 (2.1  Eclair) |23/08/2016
 
 ## Setup
 ------
@@ -13,19 +13,25 @@ Open the `build.gradle` file of your project and update the repository and depen
 ```gradle
      repositories {
         // ... other project repositories
-        maven { url "https://repo.pointwise.co/nexus/content/repositories/pointwise" }
+        maven { 
+            url "https://repo.pointwise.co/nexus/content/repositories/pointwise"
+            credentials {
+               username = "$YOUR_USERNAME$"
+               password = "$YOUR_PASSWORD$"
+            }
+        }
         // Repository will be provided separately 
      }
      // ...
  	 dependencies {
         // ... other project dependencies
-        compile ("co.locarta.sdk:LOCARTA_SDK_VERSION:pubProd@aar") {
+        compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubRelease@aar") {
             transitive = true;
         }
      }
 ```     
 
-where `LOCARTA_SDK_VERSION` is the SDK version number you wish to use.
+where `$LOCARTA_SDK_VERSION$` is the SDK version number you wish to use.
 Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
 
 
@@ -35,7 +41,9 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```xml
     <application>
         <!-- other content -->
-        <meta-data android:name="co.locarta.sdk.pid" android:value="YOUR_PUBLISHER_KEY"/>        
+        <meta-data 
+               android:name="co.locarta.sdk.pid" 
+               android:value="YOUR_PUBLISHER_KEY" />        
     </application>
 ```
 where `YOUR_PUBLISHER_KEY` is your Locarta publisher key.
@@ -116,14 +124,15 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 | ------------- |  -------------
 |com.google.android.gms:play-services-location | 9.4.0
 |com.google.android.gms:play-services-gcm | 9.4.0
-|com.android.support:appcompat-v7 | 24.1.1
 |com.google.code.gson:gson | 2.7
 |com.squareup.retrofit2:retrofit| 2.1.0
 |com.squareup.retrofit2:converter-gson | 2.1.0
 |de.greenrobot:eventbus| 3.0.0
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
-|com.google.protobuf|2.6.1
+|com.google.protobuf|3.0.0-beta-3
+|org.apache.commons:commons-io|1.3.2
+|io.protostuff:protostuff-json|1.3.5
 
 ------
 
