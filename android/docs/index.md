@@ -42,10 +42,10 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
         <!-- other content -->
         <meta-data 
                android:name="co.locarta.sdk.pid" 
-               android:value="YOUR_PUBLISHER_KEY" />        
+               android:value="YOUR_PUBLISHER_ID" />        
     </application>
 ```
-where `YOUR_PUBLISHER_KEY` is your Locarta publisher key.
+where `YOUR_PUBLISHER_ID` is your Locarta publisher key.
 
 ### 3) Initialise SDK on App Start
 
