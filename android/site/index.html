@@ -83,10 +83,10 @@
 </thead>
 <tbody>
 <tr>
-<td>143.be90ae4</td>
-<td>400 KB</td>
-<td>9 (2.3  Gingerbread)</td>
-<td>03/08/2016</td>
+<td>1.0.6</td>
+<td>415 KB</td>
+<td>7 (2.1  Eclair)</td>
+<td>23/08/2016</td>
 </tr>
 </tbody>
 </table>
@@ -96,29 +96,40 @@
 <p>Open the <code>build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
 <pre><code class="gradle">     repositories {
         // ... other project repositories
-        maven { url &quot;https://repo.pointwise.co/nexus/content/repositories/pointwise&quot; }
+        maven { 
+            url &quot;http://nexus.locarta.co/content/repositories/android-sdk/&quot;
+            credentials {
+               username = &quot;$YOUR_USERNAME$&quot;
+               password = &quot;$YOUR_PASSWORD$&quot;
+            }
+        }
         // Repository will be provided separately 
      }
      // ...
      dependencies {
         // ... other project dependencies
-        compile (&quot;co.locarta.sdk:LOCARTA_SDK_VERSION:pubProd@aar&quot;) {
+        compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
      }
 </code></pre>
 
-<p>where <code>LOCARTA_SDK_VERSION</code> is the SDK version number you wish to use.
+<p>Where <code>$YOUR_USERNAME$</code> and <code>$YOUR_PASSWORD$</code> are the credentials to the nexus repository.
+<em>They match with the credentials you got to get access to this documentation</em>.</p>
+<p><code>$LOCARTA_SDK_VERSION$</code> is the SDK version number you wish to use.
 Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta.sdk.LocartaSDK</code> into your app.</p>
+<p>We advise to use <code>https</code> in the repository url (e.g. `https://nexus.locarta.co/..., we intentinally keep http to avoid certain problems with specific java versions.)</p>
 <h3 id="2-set-publisher-key">2) Set Publisher Key</h3>
 <p>Add a <code>&lt;meta-data&gt;</code> tag to the <code>AndroidManifest.xml</code> of your project:</p>
 <pre><code class="xml">    &lt;application&gt;
         &lt;!-- other content --&gt;
-        &lt;meta-data android:name=&quot;co.locarta.sdk.pid&quot; android:value=&quot;YOUR_PUBLISHER_KEY&quot;/&gt;        
+        &lt;meta-data 
+               android:name=&quot;co.locarta.sdk.pid&quot; 
+               android:value=&quot;YOUR_PUBLISHER_ID&quot; /&gt;        
     &lt;/application&gt;
 </code></pre>
 
-<p>where <code>YOUR_PUBLISHER_KEY</code> is your Locarta publisher key.</p>
+<p>where <code>YOUR_PUBLISHER_ID</code> is your Locarta publisher id.</p>
 <h3 id="3-initialise-sdk-on-app-start">3) Initialise SDK on App Start</h3>
 <p>You need to initialise the Locarta SDK only once – on app start:</p>
 <pre><code class="java">    // Add this line to the header of your file
@@ -217,10 +228,6 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <td>9.4.0</td>
 </tr>
 <tr>
-<td>com.android.support:appcompat-v7</td>
-<td>24.1.1</td>
-</tr>
-<tr>
 <td>com.google.code.gson:gson</td>
 <td>2.7</td>
 </tr>
@@ -246,7 +253,15 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 </tr>
 <tr>
 <td>com.google.protobuf</td>
-<td>2.6.1</td>
+<td>3.0.0-beta-3</td>
+</tr>
+<tr>
+<td>org.apache.commons:commons-io</td>
+<td>1.3.2</td>
+</tr>
+<tr>
+<td>io.protostuff:protostuff-json</td>
+<td>1.3.5</td>
 </tr>
 </tbody>
 </table>
@@ -314,5 +329,5 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-19 10:44:27.937696
+Build Date UTC : 2016-08-24 11:45:02.216085
 -->

@@ -31,8 +31,13 @@ Open the `build.gradle` file of your project and update the repository and depen
      }
 ```     
 
-where `$LOCARTA_SDK_VERSION$` is the SDK version number you wish to use.
+Where `$YOUR_USERNAME$` and `$YOUR_PASSWORD$` are the credentials to the nexus repository.
+*They match with the credentials you got to get access to this documentation*.
+
+`$LOCARTA_SDK_VERSION$` is the SDK version number you wish to use.
 Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
+
+We advise to use `https` in the repository url (e.g. `https://nexus.locarta.co/..., we intentinally keep http to avoid certain problems with specific java versions.)
 
 ### 2) Set Publisher Key
 
@@ -45,7 +50,7 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
                android:value="YOUR_PUBLISHER_ID" />        
     </application>
 ```
-where `YOUR_PUBLISHER_ID` is your Locarta publisher key.
+where `YOUR_PUBLISHER_ID` is your Locarta publisher id.
 
 ### 3) Initialise SDK on App Start
 
