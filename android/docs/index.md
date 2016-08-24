@@ -14,7 +14,7 @@ Open the `build.gradle` file of your project and update the repository and depen
      repositories {
         // ... other project repositories
         maven { 
-            url "https://repo.pointwise.co/nexus/content/repositories/pointwise"
+            url "https://nexus.locarta.co/content/repositories/android-sdk/"
             credentials {
                username = "$YOUR_USERNAME$"
                password = "$YOUR_PASSWORD$"
