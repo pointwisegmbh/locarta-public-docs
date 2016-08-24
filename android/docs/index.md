@@ -145,6 +145,7 @@ If you see the message: `Can't find referenced class from the SDK`, add these li
 -dontwarn co.pointwise.proto.JournalProto$.**
 -dontwarn com.google.common.base.Function
 -dontwarn com.google.common.collect.Lists
+-dontwarn com.google.common.io.BaseEncoding
 ```
 
 
