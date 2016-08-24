@@ -14,7 +14,7 @@ Open the `build.gradle` file of your project and update the repository and depen
      repositories {
         // ... other project repositories
         maven { 
-            url "https://nexus.locarta.co/content/repositories/android-sdk/"
+            url "http://nexus.locarta.co/content/repositories/android-sdk/"
             credentials {
                username = "$YOUR_USERNAME$"
                password = "$YOUR_PASSWORD$"
@@ -33,7 +33,6 @@ Open the `build.gradle` file of your project and update the repository and depen
 
 where `$LOCARTA_SDK_VERSION$` is the SDK version number you wish to use.
 Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
-
 
 ### 2) Set Publisher Key
 
