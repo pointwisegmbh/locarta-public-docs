@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 1.0.6 | 415 KB| 7 (2.1  Eclair) |23/08/2016
+| 1.1.0 | 404 KB | 7 (2.1  Eclair) | 25/08/2016
 
 ## Setup
 ------
@@ -25,7 +25,7 @@ Open the `build.gradle` file of your project and update the repository and depen
      // ...
  	 dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.0.+ 
+        // We recommend to set version as: 1.1.+ 
         compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
             transitive = true;
         }
@@ -132,6 +132,7 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |com.google.android.gms:play-services-location | 9.4.0
 |com.google.android.gms:play-services-gcm | 9.4.0
 |com.google.code.gson:gson | 2.7
+|io.reactivex:rxjava | 1.1.8
 |com.squareup.retrofit2:retrofit| 2.1.0
 |com.squareup.retrofit2:converter-gson | 2.1.0
 |de.greenrobot:eventbus| 3.0.0
