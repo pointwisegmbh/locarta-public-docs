@@ -83,10 +83,10 @@
 </thead>
 <tbody>
 <tr>
-<td>1.0.6</td>
-<td>415 KB</td>
+<td>1.1.0</td>
+<td>404 KB</td>
 <td>7 (2.1  Eclair)</td>
-<td>23/08/2016</td>
+<td>25/08/2016</td>
 </tr>
 </tbody>
 </table>
@@ -108,7 +108,7 @@
      // ...
      dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.0.+ 
+        // We recommend to set version as: 1.1.+ 
         compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
@@ -168,6 +168,7 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <h2 id="integration-information">Integration Information</h2>
 <hr />
 <p>By default the host app <strong>should not</strong> be setting any additional permissions in its manifest.</p>
+<p>In case Target SDK Version &gt;= 23 we rely on the fact that <code>Access Fine Location</code> / <code>Access Coarse Location</code> permisions are handeled by the host app (e.g. pop-out permission dialog is shown to the user).</p>
 <p>The set of minimal permissions embedded in the Locarta SDK is:</p>
 <table>
 <thead>
@@ -233,6 +234,10 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <td>2.7</td>
 </tr>
 <tr>
+<td>io.reactivex:rxjava</td>
+<td>1.1.8</td>
+</tr>
+<tr>
 <td>com.squareup.retrofit2:retrofit</td>
 <td>2.1.0</td>
 </tr>
@@ -273,6 +278,7 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <pre><code>-dontwarn co.pointwise.proto.JournalProto$.**
 -dontwarn com.google.common.base.Function
 -dontwarn com.google.common.collect.Lists
+-dontwarn com.google.common.io.BaseEncoding
 </code></pre>
 
 <h4 id="downgrading-min-sdk-version-to-api-v7">Downgrading min SDK version to API v7</h4>
@@ -330,5 +336,5 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-08-24 11:47:04.614094
+Build Date UTC : 2016-08-25 12:14:52.848244
 -->
