@@ -100,6 +100,8 @@ If you want to stop SDK for some reason:
 
 By default the host app __should not__ be setting any additional permissions in its manifest.
 
+In case Target SDK Version >= 23 we rely on the fact that `Access Fine Location` / `Access Coarse Location` permisions are handeled by the host app (e.g. pop-out permission dialog is shown to the user).
+
 The set of minimal permissions embedded in the Locarta SDK is:
 
 | Permission Name | Plain English Name in App | Plain German Name in App
