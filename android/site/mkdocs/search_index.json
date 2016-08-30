@@ -69,6 +69,41 @@
             "location": "/#downgrading-min-sdk-version-to-api-v7", 
             "text": "Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.   If you get an error saying:   Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary= com.google.android.gms  to force usage  Then add this line to the manifest of your application:   uses-sdk tools:overrideLibrary= com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid /", 
             "title": "Downgrading min SDK version to API v7"
+        }, 
+        {
+            "location": "/unity/", 
+            "text": "Locarta Unity SDK\n\n\n\n\n\n\n\n\nLatest Version\n\n\nSize\n\n\nUnity version\n\n\nRelease Date\n\n\n\n\n\n\n\n\n\n\n1.1.1\n\n\n5.7M\n\n\n= 5\n\n\n25/08/2016\n\n\n\n\n\n\n\n\nLocarta SDK is distributed as Unity plugin. \n\n\nAt the moment we support Unity Framework version more or equal 5.x\n\n\nTo get started you need 2 things (they are provided separately):\n\n\n\n\n\n\nPublisher ID\n\n\n\n\n\n\nCredentials to download the plugin  \n\n\n\n\n\n\nSetup\n\n\n\n\n1) Download and install plugin\n\n\nDownload the archive:\n\n\n# will become active 31.08.2016\nhttps://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip\n\n\n\n\nYou will be prompted with Basic Authentication (use credentials for downloading)\n\n\nUnzip the contents of the folder \n./Assets/Plugins/Android\n\n\nFor example:\n\n\n# works from the project root if ./Assets/Plugins/Android foder already exists\nunzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android\n\n\n\n\n2) Set publisher key\n\n\nAdd file  named \nlocarta.properties\n to \n./Assets/Plugins/Android/assets\n folder.\n\n\nThe file should look like:\n\n\npid=\nYOUR PUBLISHER ID\n\n\n\n\n\n3) Initialise SDK on App Start\n\n\npublic class MainScene : MonoBehaviour {\n\n    // Use the method for the initialisation    \n    void Start () {\n            // Get context\n            AndroidJavaClass unityPlayer = new AndroidJavaClass(\ncom.unity3d.player.UnityPlayer\n);\n            AndroidJavaObject activity = unityPlayer.GetStatic\nAndroidJavaObject\n(\ncurrentActivity\n);\n\n            // Initialize SDK\n            AndroidJavaClass locartaSdk = new AndroidJavaClass(\nco.locarta.sdk.LocartaSdk\n);\n            locartaSdk.CallStatic(\ninitialize\n, activity);\n        }\n    }   \n\n\n\n\n4) Obtain User Opt-In\n\n\nUser must opt in to Locarta's market research programme for the SDK to start working. This can be done either:\n\n\na) Via an API call (if your application has own agreement dialog or compliant terms and conditions):\n\n\n// Accepting SDK agreements \nAndroidJavaClass locartaSdk = new AndroidJavaClass(\nco.locarta.sdk.LocartaSdk\n);\nlocartaSdk.CallStatic(\nsetAgreementAccepted\n, context, true);\n\n\n\n\nb) Via the default Locarta agreement dialog:\n\n\nif (!locartaSdk.CallStatic\nbool\n (\nisAgreementAccepted\n, activity)) {\n      activity.Call (\nrunOnUiThread\n, new AndroidJavaRunnable (() =\n { \n          locartaSdk.CallStatic\nAndroidJavaObject\n (\nshowAgreementDialog\n, activity);\n      }));\n  }", 
+            "title": "Unity Guide"
+        }, 
+        {
+            "location": "/unity/#locarta-unity-sdk", 
+            "text": "Latest Version  Size  Unity version  Release Date      1.1.1  5.7M  = 5  25/08/2016     Locarta SDK is distributed as Unity plugin.   At the moment we support Unity Framework version more or equal 5.x  To get started you need 2 things (they are provided separately):    Publisher ID    Credentials to download the plugin", 
+            "title": "Locarta Unity SDK"
+        }, 
+        {
+            "location": "/unity/#setup", 
+            "text": "", 
+            "title": "Setup"
+        }, 
+        {
+            "location": "/unity/#1-download-and-install-plugin", 
+            "text": "Download the archive:  # will become active 31.08.2016\nhttps://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip  You will be prompted with Basic Authentication (use credentials for downloading)  Unzip the contents of the folder  ./Assets/Plugins/Android  For example:  # works from the project root if ./Assets/Plugins/Android foder already exists\nunzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android", 
+            "title": "1) Download and install plugin"
+        }, 
+        {
+            "location": "/unity/#2-set-publisher-key", 
+            "text": "Add file  named  locarta.properties  to  ./Assets/Plugins/Android/assets  folder.  The file should look like:  pid= YOUR PUBLISHER ID", 
+            "title": "2) Set publisher key"
+        }, 
+        {
+            "location": "/unity/#3-initialise-sdk-on-app-start", 
+            "text": "public class MainScene : MonoBehaviour {\n\n    // Use the method for the initialisation    \n    void Start () {\n            // Get context\n            AndroidJavaClass unityPlayer = new AndroidJavaClass( com.unity3d.player.UnityPlayer );\n            AndroidJavaObject activity = unityPlayer.GetStatic AndroidJavaObject ( currentActivity );\n\n            // Initialize SDK\n            AndroidJavaClass locartaSdk = new AndroidJavaClass( co.locarta.sdk.LocartaSdk );\n            locartaSdk.CallStatic( initialize , activity);\n        }\n    }", 
+            "title": "3) Initialise SDK on App Start"
+        }, 
+        {
+            "location": "/unity/#4-obtain-user-opt-in", 
+            "text": "User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:  a) Via an API call (if your application has own agreement dialog or compliant terms and conditions):  // Accepting SDK agreements \nAndroidJavaClass locartaSdk = new AndroidJavaClass( co.locarta.sdk.LocartaSdk );\nlocartaSdk.CallStatic( setAgreementAccepted , context, true);  b) Via the default Locarta agreement dialog:  if (!locartaSdk.CallStatic bool  ( isAgreementAccepted , activity)) {\n      activity.Call ( runOnUiThread , new AndroidJavaRunnable (() =  { \n          locartaSdk.CallStatic AndroidJavaObject  ( showAgreementDialog , activity);\n      }));\n  }", 
+            "title": "4) Obtain User Opt-In"
         }
     ]
 }
