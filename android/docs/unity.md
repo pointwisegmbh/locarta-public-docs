@@ -1,18 +1,16 @@
 # Locarta Unity SDK 
 
 
-| Latest Version | Size | Unity version | Release Date
+| Latest Version | Size | Min Unity version | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 1.1.1 | 5.7M | >= 5 | 25/08/2016|
+| 1.1.1 | 5.7M | 5.x | 25/08/2016|
 
-Locarta SDK is distributed as Unity plugin. 
+The Locarta SDK can be integrated through a Unity plugin. 
 
-At the moment we support Unity Framework version more or equal 5.x
+We currently support v5.x or higher of the Unity Framework.
 
-To get started you need 2 things (they are provided separately):
-
+To get started you will need (to be provided separately):
 *  Publisher ID
-
 *  Credentials to download the plugin  
 
 
@@ -28,9 +26,9 @@ Download the archive:
 https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip
 ```
 
-You will be prompted with Basic Authentication (use credentials for downloading)
+When prompted for authentication, use the credentials mentioned above.
 
-Unzip the contents of the folder `./Assets/Plugins/Android`
+Once downloaded, unzip the contents to the folder `./Assets/Plugins/Android`
 
 For example:
 
@@ -42,9 +40,9 @@ unzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android
 
 ### 2) Set publisher key
 
-Add file  named `locarta.properties` to `./Assets/Plugins/Android/assets` folder.
+Add a file named `locarta.properties` to the `./Assets/Plugins/Android/assets` folder.
 
-The file should look like:
+Set the file contents to the following:
 
 ```
 pid=<YOUR PUBLISHER ID>
@@ -72,10 +70,9 @@ public class MainScene : MonoBehaviour {
 
 ### 4) Obtain User Opt-In
 
+Users must opt in to Locarta's market research programme for the SDK to start working. This can be done either:
 
-User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:
-
-a) Via an API call (if your application has own agreement dialog or compliant terms and conditions):
+a) Via an API call (if your application has its own agreement dialog or compliant privacy policy):
 
 ```cs
 // Accepting SDK agreements 
