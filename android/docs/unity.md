@@ -22,7 +22,6 @@ To get started you will need (to be provided separately):
 Download the archive:
 
 ```
-# will become active 31.08.2016
 https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip
 ```
 
@@ -89,6 +88,31 @@ if (!locartaSdk.CallStatic<bool> ("isAgreementAccepted", activity)) {
       }));
   }
 ```
+
+## Integration Information 
+
+------
+
+
+The set of minimal permissions embedded in the Locarta SDK is:
+
+| Permission Name | Plain English Name in App | Plain German Name in App
+| ------------- | ------------- | ------------- 
+|android.permission.INTERNET | Full network access | Zugriff auf alle Netzwerke
+|android.permission.ACCESS_COARSE_LOCATION| Approximate location| Ungefährer Standort 
+|android.permission.ACCESS_FINE_LOCATION| Precise location| Genauer Standort 
+|android.permission.ACCESS_NETWORK_STATE | View network connections| Netzwerkverbindungen abrufen
+|android.permission.ACCESS_WIFI_STATE | View wifi connections | WLAN-Verbindungen abrufen
+|android.permission.CHANGE_WIFI_STATE | Connect and disconnect from Wi-Fi | WLAN-Verbindungen herstellen und trennen
+
+
+
+### Performance Impact
+
+We expect a battery impact of roughly 2-3%.
+
+Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).
+
 
 
 
