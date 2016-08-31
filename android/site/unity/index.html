@@ -100,6 +100,8 @@
         
             <li><a href="#setup">Setup</a></li>
         
+            <li><a href="#integration-information">Integration Information</a></li>
+        
     
     </ul>
 </div></div>
@@ -111,7 +113,7 @@
 <tr>
 <th>Latest Version</th>
 <th>Size</th>
-<th>Unity version</th>
+<th>Min Unity version</th>
 <th>Release Date</th>
 </tr>
 </thead>
@@ -119,40 +121,33 @@
 <tr>
 <td>1.1.1</td>
 <td>5.7M</td>
-<td>&gt;= 5</td>
+<td>5.x</td>
 <td>25/08/2016</td>
 </tr>
 </tbody>
 </table>
-<p>Locarta SDK is distributed as Unity plugin. </p>
-<p>At the moment we support Unity Framework version more or equal 5.x</p>
-<p>To get started you need 2 things (they are provided separately):</p>
-<ul>
-<li>
-<p>Publisher ID</p>
-</li>
-<li>
-<p>Credentials to download the plugin  </p>
-</li>
-</ul>
+<p>The Locarta SDK can be integrated through a Unity plugin. </p>
+<p>We currently support v5.x or higher of the Unity Framework.</p>
+<p>To get started you will need (to be provided separately):
+<em>  Publisher ID
+</em>  Credentials to download the plugin  </p>
 <h2 id="setup">Setup</h2>
 <hr />
 <h3 id="1-download-and-install-plugin">1) Download and install plugin</h3>
 <p>Download the archive:</p>
-<pre><code># will become active 31.08.2016
-https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip
+<pre><code>https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip
 </code></pre>
 
-<p>You will be prompted with Basic Authentication (use credentials for downloading)</p>
-<p>Unzip the contents of the folder <code>./Assets/Plugins/Android</code></p>
+<p>When prompted for authentication, use the credentials mentioned above.</p>
+<p>Once downloaded, unzip the contents to the folder <code>./Assets/Plugins/Android</code></p>
 <p>For example:</p>
 <pre><code class="sh"># works from the project root if ./Assets/Plugins/Android foder already exists
 unzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android
 </code></pre>
 
 <h3 id="2-set-publisher-key">2) Set publisher key</h3>
-<p>Add file  named <code>locarta.properties</code> to <code>./Assets/Plugins/Android/assets</code> folder.</p>
-<p>The file should look like:</p>
+<p>Add a file named <code>locarta.properties</code> to the <code>./Assets/Plugins/Android/assets</code> folder.</p>
+<p>Set the file contents to the following:</p>
 <pre><code>pid=&lt;YOUR PUBLISHER ID&gt;
 </code></pre>
 
@@ -173,8 +168,8 @@ unzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android
 </code></pre>
 
 <h3 id="4-obtain-user-opt-in">4) Obtain User Opt-In</h3>
-<p>User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:</p>
-<p>a) Via an API call (if your application has own agreement dialog or compliant terms and conditions):</p>
+<p>Users must opt in to Locarta's market research programme for the SDK to start working. This can be done either:</p>
+<p>a) Via an API call (if your application has its own agreement dialog or compliant privacy policy):</p>
 <pre><code class="cs">// Accepting SDK agreements 
 AndroidJavaClass locartaSdk = new AndroidJavaClass(&quot;co.locarta.sdk.LocartaSdk&quot;);
 locartaSdk.CallStatic(&quot;setAgreementAccepted&quot;, context, true);
@@ -186,7 +181,55 @@ locartaSdk.CallStatic(&quot;setAgreementAccepted&quot;, context, true);
           locartaSdk.CallStatic&lt;AndroidJavaObject&gt; (&quot;showAgreementDialog&quot;, activity);
       }));
   }
-</code></pre></div>
+</code></pre>
+
+<h2 id="integration-information">Integration Information</h2>
+<hr />
+<p>The set of minimal permissions embedded in the Locarta SDK is:</p>
+<table>
+<thead>
+<tr>
+<th>Permission Name</th>
+<th>Plain English Name in App</th>
+<th>Plain German Name in App</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>android.permission.INTERNET</td>
+<td>Full network access</td>
+<td>Zugriff auf alle Netzwerke</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_COARSE_LOCATION</td>
+<td>Approximate location</td>
+<td>Ungefährer Standort</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_FINE_LOCATION</td>
+<td>Precise location</td>
+<td>Genauer Standort</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_NETWORK_STATE</td>
+<td>View network connections</td>
+<td>Netzwerkverbindungen abrufen</td>
+</tr>
+<tr>
+<td>android.permission.ACCESS_WIFI_STATE</td>
+<td>View wifi connections</td>
+<td>WLAN-Verbindungen abrufen</td>
+</tr>
+<tr>
+<td>android.permission.CHANGE_WIFI_STATE</td>
+<td>Connect and disconnect from Wi-Fi</td>
+<td>WLAN-Verbindungen herstellen und trennen</td>
+</tr>
+</tbody>
+</table>
+<h3 id="performance-impact">Performance Impact</h3>
+<p>We expect a battery impact of roughly 2-3%.</p>
+<p>Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).</p></div>
             
         </div>
 
