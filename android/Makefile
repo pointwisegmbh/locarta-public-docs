@@ -1,5 +1,5 @@
 DOCKER = docker
-REPO = docker.pointwise.co
+REPO = docker.locarta.co
 NAME = docs.locarta.co
 
 GIT_VERSION := $(shell git describe --abbrev=7 --dirty --always --tags)
