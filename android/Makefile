@@ -6,6 +6,9 @@ GIT_VERSION := $(shell git describe --abbrev=7 --dirty --always --tags)
 
 TAG = $(GIT_VERSION) 
 
+docker:
+	make compile && make build
+
 build:
 	$(DOCKER) build -t $(NAME) .
 
