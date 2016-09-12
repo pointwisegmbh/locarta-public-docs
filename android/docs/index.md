@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 1.1.3 | 450 KB | 7 (2.1  Eclair) | 9/09/2016
+| 1.1.4 | 450 KB | 7 (2.1  Eclair) | 9/09/2016
 
 ## Setup
 ------
@@ -140,7 +140,7 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |de.greenrobot:eventbus| 3.0.0
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
-|com.google.protobuf|3.0.0-beta-3
+|com.google.protobuf|3.0.0
 |org.apache.commons:commons-io|1.3.2
 |io.protostuff:protostuff-json|1.3.5
 
