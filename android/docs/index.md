@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 1.1.4 | 450 KB | 7 (2.1  Eclair) | 9/09/2016
+| 1.1.5 | 450 KB | 7 (2.1  Eclair) | 9/09/2016
 
 ## Setup
 ------
@@ -76,22 +76,28 @@ User must opt in to Locarta's market research programme for the SDK to start wor
 a) Via the default Locarta agreement dialog:
 ```java
     // Put this code somewhere in the main activities
-    LocartaSdk.showAgreementDialog(this);
+    LocartaSdk.showAgreementDialog(getActivity());
 ```    
 b) Via an API call (if your application has own agreement dialog or compliant terms and conditions):
 ``` java
-    LocartaSDK.setTermsAccepted(true);
+    LocartaSDK.setAgreementAccepted(getContext(), true);
 ```    
     
 If you want to check whether the user has opted in, call:
 ``` java
     // The call returns true or false if user accepted terms or not
-    LocartaSDK.getTermsAccepted();        
+    LocartaSDK.isAgreementAccepted(getContext());        
+```
+
+You can also check whether user saw an agreement dialog:
+``` java
+    // The call returns TermStatus enum
+    LocartaSDK.getAgreementStatus(getContext());
 ```
 
 If you want to stop SDK for some reason:
 ```java
-   LocartaSdk.stop(context);
+   LocartaSdk.stop(getContext());
 ```
 
 ## Integration Information 
@@ -132,7 +138,6 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 | ------------- |  -------------
 |com.google.android.gms:play-services-location | 9.4.0
 |com.google.android.gms:play-services-gcm | 9.4.0
-|com.google.android.gms:play-services-contextmanager | 9.4.0
 |com.google.code.gson:gson | 2.7
 |io.reactivex:rxjava | 1.1.8
 |com.squareup.retrofit2:retrofit| 2.1.0
@@ -141,8 +146,6 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf|3.0.0
-|org.apache.commons:commons-io|1.3.2
-|io.protostuff:protostuff-json|1.3.5
 
 ------
 
