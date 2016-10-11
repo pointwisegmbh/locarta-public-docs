@@ -1,7 +1,7 @@
 # Locarta Android SDK
 
 | Latest Version | Size | Minimal Android API verison | Release Date
-| ------------- |  ------------- | -------------  | ------------- 
+| ------------- |  ------------- | -------------  | -------------
 | 1.1.6 | 430 KB | 7 (2.1  Eclair) | 21/09/2016
 
 ## Setup
@@ -13,19 +13,19 @@ Open the `build.gradle` file of your project and update the repository and depen
 ```gradle
      repositories {
         // ... other project repositories
-        maven { 
+        maven {
             url "http://nexus.locarta.co/content/repositories/android-sdk/"
             credentials {
                username = "$YOUR_USERNAME$"
                password = "$YOUR_PASSWORD$"
             }
         }
-        // Repository will be provided separately 
+        // Repository will be provided separately
      }
      // ...
  	 dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.1.+ 
+        // We recommend to set version as: 1.1.+
         compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
             transitive = true;
         }
@@ -46,8 +46,8 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```xml
     <application>
         <!-- other content -->
-        <meta-data 
-               android:name="co.locarta.sdk.pid" 
+        <meta-data
+               android:name="co.locarta.sdk.pid"
                android:value="YOUR_PUBLISHER_ID" />        
     </application>
 ```
@@ -82,7 +82,7 @@ b) Via an API call (if your application has own agreement dialog or compliant te
 ``` java
     LocartaSDK.setAgreementAccepted(getContext(), true);
 ```    
-    
+
 If you want to check whether the user has opted in, call:
 ``` java
     // The call returns true or false if user accepted terms or not
@@ -100,7 +100,31 @@ If you want to stop SDK for some reason:
    LocartaSdk.stop(getContext());
 ```
 
-## Integration Information 
+### 5) Push notifications
+
+If you're using Google Cloud Messaging for sending push notifications to your application please
+call the special method to split Locarta SDK's notifications and yours:
+
+```java
+   LocartaSdk.handleMessage(Bundle bundle);
+```
+
+So your receive could look like that:
+
+```java
+public class AppGcmListenerService extends GcmListenerService {
+
+    @Override
+    public void onMessageReceived(String from, Bundle bundle) {
+        if (!LocartaSdk.handleMessage(bundle)) {
+            Log.i("AppGcmListenerService", String.format("Received message from %s with data %s", from, bundle));
+        }
+    }
+
+}
+```
+
+## Integration Information
 
 ------
 
@@ -111,7 +135,7 @@ In case Target SDK Version >= 23 we rely on the fact that `Access Fine Location`
 The set of minimal permissions embedded in the Locarta SDK is:
 
 | Permission Name | Plain English Name in App | Plain German Name in App
-| ------------- | ------------- | ------------- 
+| ------------- | ------------- | -------------
 |android.permission.INTERNET | Full network access | Zugriff auf alle Netzwerke
 |android.permission.ACCESS_FINE_LOCATION| Precise location| Genauer Standort
 |android.permission.ACCESS_COARSE_LOCATION| Approximate location| Ungefährer Standort
@@ -133,7 +157,7 @@ We expect a battery impact of roughly 2-3%.
 
 Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).
 
-### 3rd-Party Dependencies 
+### 3rd-Party Dependencies
 
 The Locarta SDK should be implemented as a transitive @aar dependency. These are the 3rd-party dependencies it uses:
 
@@ -154,9 +178,9 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 
 ### Troubleshooting
 
-#### Proguard 
+#### Proguard
 
-If you see the message: `Can't find referenced class from the SDK`, add these lines to your proguard configuration: 
+If you see the message: `Can't find referenced class from the SDK`, add these lines to your proguard configuration:
 
 ```
 -dontwarn co.pointwise.proto.JournalProto$.**
@@ -168,17 +192,15 @@ If you see the message: `Can't find referenced class from the SDK`, add these li
 
 #### Downgrading min SDK version to API v7
 
-Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9. 
+Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.
 
-If you get an error saying: 
+If you get an error saying:
 ```
 Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary="com.google.android.gms" to force usage
 ```
 
-Then add this line to the manifest of your application: 
+Then add this line to the manifest of your application:
 
 ```xml
 <uses-sdk tools:overrideLibrary="com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid"/>
 ```
-
-
