@@ -95,12 +95,15 @@ You can also check whether user saw an agreement dialog:
     LocartaSDK.getAgreementStatus(getContext());
 ```
 
-If you want to stop SDK for some reason:
+### 5) User Opt-Out
+
+If you need to turn off SDK manually and do not allow it to restart, you can use the following method:
+
 ```java
-   LocartaSdk.stop(getContext());
+   LocartaSDK.setAgreementAccepted(getContext(), false);
 ```
 
-### 5) Push notifications
+### 6) Push notifications
 
 If you're using Google Cloud Messaging for sending push notifications to your application please
 call the special method to split Locarta SDK's notifications and yours:
