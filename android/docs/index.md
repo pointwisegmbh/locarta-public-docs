@@ -105,8 +105,8 @@ If you need to turn off SDK manually and do not allow it to restart, you can use
 
 ### 6) Push notifications
 
-If you're using Google Cloud Messaging for sending push notifications to your application please
-call the special method to split the SDK's notifications from yours:
+If you use Google Cloud Messaging to send push notifications to your application, please
+call this method to split the SDK's notifications from yours:
 
 ```java
    LocartaSdk.handleMessage(Bundle bundle);
