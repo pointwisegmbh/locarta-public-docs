@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.1.7 | 457 KB | 7 (2.1  Eclair) | 17/10/2016
+| 1.1.8 | 457 KB | 7 (2.1  Eclair) | 18/10/2016
 
 ## Setup
 ------
