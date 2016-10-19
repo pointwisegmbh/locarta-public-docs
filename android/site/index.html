@@ -119,10 +119,10 @@
 </thead>
 <tbody>
 <tr>
-<td>1.1.6</td>
-<td>430 KB</td>
+<td>1.1.8</td>
+<td>457 KB</td>
 <td>7 (2.1  Eclair)</td>
-<td>21/09/2016</td>
+<td>18/10/2016</td>
 </tr>
 </tbody>
 </table>
@@ -132,19 +132,19 @@
 <p>Open the <code>build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
 <pre><code class="gradle">     repositories {
         // ... other project repositories
-        maven { 
+        maven {
             url &quot;http://nexus.locarta.co/content/repositories/android-sdk/&quot;
             credentials {
                username = &quot;$YOUR_USERNAME$&quot;
                password = &quot;$YOUR_PASSWORD$&quot;
             }
         }
-        // Repository will be provided separately 
+        // Repository will be provided separately
      }
      // ...
      dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.1.+ 
+        // We recommend to set version as: 1.1.+
         compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
@@ -160,8 +160,8 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <p>Add a <code>&lt;meta-data&gt;</code> tag to the <code>AndroidManifest.xml</code> of your project:</p>
 <pre><code class="xml">    &lt;application&gt;
         &lt;!-- other content --&gt;
-        &lt;meta-data 
-               android:name=&quot;co.locarta.sdk.pid&quot; 
+        &lt;meta-data
+               android:name=&quot;co.locarta.sdk.pid&quot;
                android:value=&quot;YOUR_PUBLISHER_ID&quot; /&gt;        
     &lt;/application&gt;
 </code></pre>
@@ -202,8 +202,28 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
     LocartaSDK.getAgreementStatus(getContext());
 </code></pre>
 
-<p>If you want to stop SDK for some reason:</p>
-<pre><code class="java">   LocartaSdk.stop(getContext());
+<h3 id="5-user-opt-out">5) User Opt-Out</h3>
+<p>If you need to turn off SDK manually and do not allow it to restart, you can use the following method:</p>
+<pre><code class="java">   LocartaSDK.setAgreementAccepted(getContext(), false);
+</code></pre>
+
+<h3 id="6-push-notifications">6) Push notifications</h3>
+<p>If you use Google Cloud Messaging to send push notifications to your application, please
+call this method to split the SDK's notifications from yours:</p>
+<pre><code class="java">   LocartaSdk.handleMessage(Bundle bundle);
+</code></pre>
+
+<p>So your receiver should look something like this:</p>
+<pre><code class="java">public class AppGcmListenerService extends GcmListenerService {
+
+    @Override
+    public void onMessageReceived(String from, Bundle bundle) {
+        if (!LocartaSdk.handleMessage(bundle)) {
+            Log.i(&quot;AppGcmListenerService&quot;, String.format(&quot;Received message from %s with data %s&quot;, from, bundle));
+        }
+    }
+
+}
 </code></pre>
 
 <h2 id="integration-information">Integration Information</h2>
@@ -250,16 +270,6 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <td>Connect and disconnect from Wi-Fi</td>
 <td>WLAN-Verbindungen herstellen und trennen</td>
 </tr>
-<tr>
-<td>android.permission.RECEIVE_BOOT_COMPLETED</td>
-<td>Run at startup</td>
-<td>Beim Anschalten Starten</td>
-</tr>
-<tr>
-<td>android.permission.WAKE_LOCK</td>
-<td>Prevent phone from sleeping</td>
-<td>Ruhezustand deaktivieren</td>
-</tr>
 </tbody>
 </table>
 <h3 id="proguard">Proguard</h3>
@@ -279,11 +289,11 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <tbody>
 <tr>
 <td>com.google.android.gms:play-services-location</td>
-<td>9.4.0</td>
+<td>9.6.1</td>
 </tr>
 <tr>
 <td>com.google.android.gms:play-services-gcm</td>
-<td>9.4.0</td>
+<td>9.6.1</td>
 </tr>
 <tr>
 <td>com.google.code.gson:gson</td>
@@ -322,7 +332,7 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <hr />
 <h3 id="troubleshooting">Troubleshooting</h3>
 <h4 id="proguard_1">Proguard</h4>
-<p>If you see the message: <code>Can't find referenced class from the SDK</code>, add these lines to your proguard configuration: </p>
+<p>If you see the message: <code>Can't find referenced class from the SDK</code>, add these lines to your proguard configuration:</p>
 <pre><code>-dontwarn co.pointwise.proto.JournalProto$.**
 -dontwarn com.google.common.base.Function
 -dontwarn com.google.common.collect.Lists
@@ -330,12 +340,12 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 </code></pre>
 
 <h4 id="downgrading-min-sdk-version-to-api-v7">Downgrading min SDK version to API v7</h4>
-<p>Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9. </p>
-<p>If you get an error saying: </p>
+<p>Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.</p>
+<p>If you get an error saying:</p>
 <pre><code>Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary=&quot;com.google.android.gms&quot; to force usage
 </code></pre>
 
-<p>Then add this line to the manifest of your application: </p>
+<p>Then add this line to the manifest of your application:</p>
 <pre><code class="xml">&lt;uses-sdk tools:overrideLibrary=&quot;com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid&quot;/&gt;
 </code></pre></div>
             
@@ -384,5 +394,5 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-11 12:46:20.942513
+Build Date UTC : 2016-10-19 13:14:57.951684
 -->
