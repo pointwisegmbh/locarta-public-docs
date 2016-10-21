@@ -119,10 +119,10 @@
 </thead>
 <tbody>
 <tr>
-<td>1.1.8</td>
+<td>1.1.9</td>
 <td>457 KB</td>
 <td>7 (2.1  Eclair)</td>
-<td>18/10/2016</td>
+<td>21/10/2016</td>
 </tr>
 </tbody>
 </table>
@@ -210,16 +210,20 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 <h3 id="6-push-notifications">6) Push notifications</h3>
 <p>If you use Google Cloud Messaging to send push notifications to your application, please
 call this method to split the SDK's notifications from yours:</p>
-<pre><code class="java">   LocartaSdk.handleMessage(Bundle bundle);
+<pre><code class="java">   // Returns *true* if push notification is addressed to SDK
+   LocartaSdk.handleMessage(Bundle bundle);
 </code></pre>
 
-<p>So your receiver should look something like this:</p>
+<p>Please ignore the push notifications addressed to the SDK in your receiver:</p>
 <pre><code class="java">public class AppGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle bundle) {
-        if (!LocartaSdk.handleMessage(bundle)) {
+        if (!LocartaSdk.handleMessage(bundle)) { 
+          // Normal push notification, your logic comes here
             Log.i(&quot;AppGcmListenerService&quot;, String.format(&quot;Received message from %s with data %s&quot;, from, bundle));
+        } else {
+          // just ignore this push notification, it is addressed to the SDK
         }
     }
 
@@ -394,5 +398,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-19 13:14:57.951684
+Build Date UTC : 2016-10-21 13:13:00.198561
 -->
