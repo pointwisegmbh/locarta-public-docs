@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.1.8 | 457 KB | 7 (2.1  Eclair) | 18/10/2016
+| 1.1.9 | 457 KB | 7 (2.1  Eclair) | 21/10/2016
 
 ## Setup
 ------
@@ -109,18 +109,22 @@ If you use Google Cloud Messaging to send push notifications to your application
 call this method to split the SDK's notifications from yours:
 
 ```java
+   // Returns *true* if push notification is addressed to SDK
    LocartaSdk.handleMessage(Bundle bundle);
 ```
 
-So your receiver should look something like this:
+Please ignore the push notifications addressed to the SDK in your receiver:
 
 ```java
 public class AppGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle bundle) {
-        if (!LocartaSdk.handleMessage(bundle)) {
+        if (!LocartaSdk.handleMessage(bundle)) { 
+          // Normal push notification, your logic comes here
             Log.i("AppGcmListenerService", String.format("Received message from %s with data %s", from, bundle));
+        } else {
+          // just ignore this push notification, it is addressed to the SDK
         }
     }
 
