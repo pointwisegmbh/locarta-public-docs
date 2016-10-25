@@ -152,6 +152,7 @@ The set of minimal permissions embedded in the Locarta SDK is:
 |android.permission.ACCESS_WIFI_STATE | View wifi connections | WLAN-Verbindungen abrufen
 |android.permission.CHANGE_WIFI_STATE | Connect and disconnect from Wi-Fi | WLAN-Verbindungen herstellen und trennen
 |android.permission.WAKE_LOCK | Prevent phone from sleeping | Ruhezustand deaktivieren
+|android.permission.RECEIVE_BOOT_COMPLETED | Run at startup | Beim Anschalten Starten
 
 ### Proguard
 
