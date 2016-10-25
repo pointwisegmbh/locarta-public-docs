@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API verison | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.1.9 | 457 KB | 7 (2.1  Eclair) | 21/10/2016
+| 1.2.+ | 457 KB | 7 (2.1  Eclair) | 21/10/2016
 
 ## Setup
 ------
@@ -25,7 +25,9 @@ Open the `build.gradle` file of your project and update the repository and depen
      // ...
  	 dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.1.+
+
+        // We recommend to set version as: 1.2.+
+        // Thats how we will be able to release minor patch updates easily
         compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
             transitive = true;
         }
