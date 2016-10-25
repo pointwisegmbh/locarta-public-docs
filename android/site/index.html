@@ -119,7 +119,7 @@
 </thead>
 <tbody>
 <tr>
-<td>1.1.9</td>
+<td>1.2.+</td>
 <td>457 KB</td>
 <td>7 (2.1  Eclair)</td>
 <td>21/10/2016</td>
@@ -144,7 +144,9 @@
      // ...
      dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.1.+
+
+        // We recommend to set version as: 1.2.+
+        // Thats how we will be able to release minor patch updates easily
         compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
@@ -398,5 +400,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-21 13:13:00.198561
+Build Date UTC : 2016-10-25 10:25:38.317119
 -->
