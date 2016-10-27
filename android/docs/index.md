@@ -80,7 +80,7 @@ a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):
         LocartaSDK.setAgreementAccepted(getContext(), true);
     }
 ``` 
-a) Explicit opt-in (via the Locarta agreement dialog):
+a) Explicit opt-in (if you want to show a popup agreement dialog prompting users to opt in):
 ```java
     // Put this code somewhere in the main activities to show the dialog
     LocartaSdk.showAgreementDialog(getActivity());
