@@ -182,14 +182,17 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 </code></pre>
 
 <h3 id="4-obtain-user-opt-in">4) Obtain User Opt-In</h3>
-<p>User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:</p>
-<p>a) Via the default Locarta agreement dialog:</p>
-<pre><code class="java">    // Put this code somewhere in the main activities
-    LocartaSdk.showAgreementDialog(getActivity());
+<p>The SDK will not start working until the user has opted in – this needs to be done only once per user. There are two ways to do it, depending on how the opt-in is gathered:</p>
+<p>a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):</p>
+<pre><code class="java">    // Put this code in your Application.onCreate() function, after LocartaSdk.initialize()
+    if(!LocartaSDK.isAgreementAccepted(getContext())) {
+        LocartaSDK.setAgreementAccepted(getContext(), true);
+    }
 </code></pre>
 
-<p>b) Via an API call (if your application has own agreement dialog or compliant terms and conditions):</p>
-<pre><code class="java">    LocartaSDK.setAgreementAccepted(getContext(), true);
+<p>a) Explicit opt-in (if you want to show a popup agreement dialog prompting users to opt in):</p>
+<pre><code class="java">    // Put this code somewhere in the main activities to show the dialog
+    LocartaSdk.showAgreementDialog(getActivity());
 </code></pre>
 
 <p>If you want to check whether the user has opted in, call:</p>
@@ -398,5 +401,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-21 13:13:00.198561
+Build Date UTC : 2016-10-27 12:28:35.515695
 -->
