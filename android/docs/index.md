@@ -71,17 +71,21 @@ You need to initialise the Locarta SDK only once – on app start:
 
 ### 4) Obtain User Opt-In
 
-User must opt in to Locarta's market research programme for the SDK to start working. This can be done either:
+The SDK will not start working until the user has opted in – this needs to be done only once per user. There are two ways to do it, depending on how the opt-in is gathered:
 
-a) Via the default Locarta agreement dialog:
+a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):
+``` java
+    // Put this code in your Application.onCreate() function, after LocartaSdk.initialize()
+    if(!LocartaSDK.isAgreementAccepted(getContext())) {
+        LocartaSDK.setAgreementAccepted(getContext(), true);
+    }
+``` 
+a) Explicit opt-in (via the Locarta agreement dialog):
 ```java
-    // Put this code somewhere in the main activities
+    // Put this code somewhere in the main activities to show the dialog
     LocartaSdk.showAgreementDialog(getActivity());
 ```    
-b) Via an API call (if your application has own agreement dialog or compliant terms and conditions):
-``` java
-    LocartaSDK.setAgreementAccepted(getContext(), true);
-```    
+   
 
 If you want to check whether the user has opted in, call:
 ``` java
