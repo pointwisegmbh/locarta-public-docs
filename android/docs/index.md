@@ -1,6 +1,6 @@
 # Locarta Android SDK
 
-| Latest Version | Size | Minimal Android API verison | Release Date
+| Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
 | 1.3.0 | 457 KB | 7 (2.1  Eclair) | 31/10/2016
 
@@ -22,6 +22,7 @@ Open the `build.gradle` file of your project and update the repository and depen
         }
         // Repository will be provided separately
      }
+
      // ...
  	 dependencies {
         // ... other project dependencies
@@ -53,12 +54,16 @@ Add a `<meta-data>` tag to the `AndroidManifest.xml` of your project:
 ```
 where `YOUR_PUBLISHER_ID` is your Locarta publisher id.
 
-### 3) Initialise SDK on App Start
+### 3) Initialize SDK on App Start
+**Please call the initialization method only in the application class.**
 
-You need to initialise the Locarta SDK only once – on app start:
-``` java
+Also notice that the SDK already starts a new thread for the initialization. Hence there is no need to put the init method in a new thread.
+
+Example:
+```java
     // Add this line to the header of your file
     import co.locarta.sdk.LocartaSdk;
+
     public class SdkDemoApplication extends Application {
         @Override
         public void onCreate() {
@@ -67,6 +72,7 @@ You need to initialise the Locarta SDK only once – on app start:
             LocartaSdk.initialize(getApplicationContext());
         }
     }
+
 ```
 
 ### 4) Obtain User Opt-In
@@ -74,29 +80,29 @@ You need to initialise the Locarta SDK only once – on app start:
 The SDK will not start working until the user has opted in – this needs to be done only once per user. There are two ways to do it, depending on how the opt-in is gathered:
 
 a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):
-``` java
+```java
     // Put this code in your Application.onCreate() function, after LocartaSdk.initialize()
-    if(!LocartaSDK.isAgreementAccepted(getContext())) {
-        LocartaSDK.setAgreementAccepted(getContext(), true);
+    if(!LocartaSdk.isAgreementAccepted(getContext())) {
+        LocartaSdk.setAgreementAccepted(getContext(), true);
     }
-``` 
+```
 a) Explicit opt-in (if you want to show a popup agreement dialog prompting users to opt in):
 ```java
     // Put this code somewhere in the main activities to show the dialog
     LocartaSdk.showAgreementDialog(getActivity());
 ```    
-   
+
 
 If you want to check whether the user has opted in, call:
-``` java
+```java
     // The call returns true or false if user accepted terms or not
-    LocartaSDK.isAgreementAccepted(getContext());        
+    LocartaSdk.isAgreementAccepted(getContext());        
 ```
 
 You can also check whether user saw an agreement dialog:
-``` java
+```java
     // The call returns TermStatus enum
-    LocartaSDK.getAgreementStatus(getContext());
+    LocartaSdk.getAgreementStatus(getContext());
 ```
 
 ### 5) User Opt-Out
@@ -104,7 +110,7 @@ You can also check whether user saw an agreement dialog:
 If you need to turn off SDK manually and do not allow it to restart, you can use the following method:
 
 ```java
-   LocartaSDK.setAgreementAccepted(getContext(), false);
+   LocartaSdk.setAgreementAccepted(getContext(), false);
 ```
 
 ### 6) Push notifications
@@ -124,7 +130,7 @@ public class AppGcmListenerService extends GcmListenerService {
 
     @Override
     public void onMessageReceived(String from, Bundle bundle) {
-        if (!LocartaSdk.handleMessage(bundle)) { 
+        if (!LocartaSdk.handleMessage(bundle)) {
           // Normal push notification, your logic comes here
             Log.i("AppGcmListenerService", String.format("Received message from %s with data %s", from, bundle));
         } else {
@@ -180,7 +186,26 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |de.greenrobot:eventbus| 3.0.0
 |com.google.dagger:dagger| 2.0
 |ch.hsr:geohash| 1.0.13
-|com.google.protobuf|3.0.0
+|com.google.protobuf-java|3.0.0
+
+#### Exclude dependencies
+
+If you're using one of the libraries listed above and want to use the most recent version of it, you can force the build system to choose it rather than using the one built into the SDK. For example if you want to force using the recent Play Services library add the Locarta SDK's dependency like this:
+
+```gradle
+dependencies {
+   compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
+       transitive = true;
+       exclude group: "com.google.android.gms", module: "play-services-gcm"
+        exclude group: "com.google.android.gms", module: "play-services-location"
+   }
+
+   compile "com.google.android.gms:play-services-gcm:$PLAY_SERVICES_VERSION$"
+  compile "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$"
+}  
+```
+
+Use the same way for others dependencies such as RxJava etc.
 
 ------
 
