@@ -113,7 +113,7 @@
 <tr>
 <th>Latest Version</th>
 <th>Size</th>
-<th>Minimal Android API verison</th>
+<th>Minimal Android API version</th>
 <th>Release Date</th>
 </tr>
 </thead>
@@ -141,6 +141,7 @@
         }
         // Repository will be provided separately
      }
+
      // ...
      dependencies {
         // ... other project dependencies
@@ -167,10 +168,13 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 </code></pre>
 
 <p>where <code>YOUR_PUBLISHER_ID</code> is your Locarta publisher id.</p>
-<h3 id="3-initialise-sdk-on-app-start">3) Initialise SDK on App Start</h3>
-<p>You need to initialise the Locarta SDK only once – on app start:</p>
+<h3 id="3-initialize-sdk-on-app-start">3) Initialize SDK on App Start</h3>
+<p><strong>Please call the initialization method only in the application class.</strong></p>
+<p>Also notice that the SDK already starts a new thread for the initialization. Hence there is no need to put the init method in a new thread.</p>
+<p>Example:</p>
 <pre><code class="java">    // Add this line to the header of your file
     import co.locarta.sdk.LocartaSdk;
+
     public class SdkDemoApplication extends Application {
         @Override
         public void onCreate() {
@@ -179,14 +183,15 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
             LocartaSdk.initialize(getApplicationContext());
         }
     }
+
 </code></pre>
 
 <h3 id="4-obtain-user-opt-in">4) Obtain User Opt-In</h3>
 <p>The SDK will not start working until the user has opted in – this needs to be done only once per user. There are two ways to do it, depending on how the opt-in is gathered:</p>
 <p>a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):</p>
 <pre><code class="java">    // Put this code in your Application.onCreate() function, after LocartaSdk.initialize()
-    if(!LocartaSDK.isAgreementAccepted(getContext())) {
-        LocartaSDK.setAgreementAccepted(getContext(), true);
+    if(!LocartaSdk.isAgreementAccepted(getContext())) {
+        LocartaSdk.setAgreementAccepted(getContext(), true);
     }
 </code></pre>
 
@@ -197,17 +202,17 @@ Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta
 
 <p>If you want to check whether the user has opted in, call:</p>
 <pre><code class="java">    // The call returns true or false if user accepted terms or not
-    LocartaSDK.isAgreementAccepted(getContext());        
+    LocartaSdk.isAgreementAccepted(getContext());        
 </code></pre>
 
 <p>You can also check whether user saw an agreement dialog:</p>
 <pre><code class="java">    // The call returns TermStatus enum
-    LocartaSDK.getAgreementStatus(getContext());
+    LocartaSdk.getAgreementStatus(getContext());
 </code></pre>
 
 <h3 id="5-user-opt-out">5) User Opt-Out</h3>
 <p>If you need to turn off SDK manually and do not allow it to restart, you can use the following method:</p>
-<pre><code class="java">   LocartaSDK.setAgreementAccepted(getContext(), false);
+<pre><code class="java">   LocartaSdk.setAgreementAccepted(getContext(), false);
 </code></pre>
 
 <h3 id="6-push-notifications">6) Push notifications</h3>
@@ -222,7 +227,7 @@ call this method to split the SDK's notifications from yours:</p>
 
     @Override
     public void onMessageReceived(String from, Bundle bundle) {
-        if (!LocartaSdk.handleMessage(bundle)) { 
+        if (!LocartaSdk.handleMessage(bundle)) {
           // Normal push notification, your logic comes here
             Log.i(&quot;AppGcmListenerService&quot;, String.format(&quot;Received message from %s with data %s&quot;, from, bundle));
         } else {
@@ -331,11 +336,26 @@ call this method to split the SDK's notifications from yours:</p>
 <td>1.0.13</td>
 </tr>
 <tr>
-<td>com.google.protobuf</td>
+<td>com.google.protobuf-java</td>
 <td>3.0.0</td>
 </tr>
 </tbody>
 </table>
+<h4 id="exclude-dependencies">Exclude dependencies</h4>
+<p>If you're using one of the libraries listed above and want to use the most recent version of it, you can force the build system to choose it rather than using the one built into the SDK. For example if you want to force using the recent Play Services library add the Locarta SDK's dependency like this:</p>
+<pre><code class="gradle">dependencies {
+   compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
+       transitive = true;
+       exclude group: &quot;com.google.android.gms&quot;, module: &quot;play-services-gcm&quot;
+        exclude group: &quot;com.google.android.gms&quot;, module: &quot;play-services-location&quot;
+   }
+
+   compile &quot;com.google.android.gms:play-services-gcm:$PLAY_SERVICES_VERSION$&quot;
+  compile &quot;com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$&quot;
+}  
+</code></pre>
+
+<p>Use the same way for others dependencies such as RxJava etc.</p>
 <hr />
 <h3 id="troubleshooting">Troubleshooting</h3>
 <h4 id="proguard_1">Proguard</h4>
@@ -401,5 +421,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-10-31 15:10:36.172694
+Build Date UTC : 2016-11-01 10:36:19.606925
 -->
