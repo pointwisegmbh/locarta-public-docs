@@ -177,14 +177,14 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 
 | Dependency | Version
 | ------------- |  -------------
-|com.google.android.gms:play-services-location | 9.6.1
-|com.google.android.gms:play-services-gcm | 9.6.1
+|com.google.android.gms:play-services-location | 9.8.0
+|com.google.android.gms:play-services-gcm | 9.8.0
 |com.google.code.gson:gson | 2.7
 |io.reactivex:rxjava | 1.1.8
 |com.squareup.retrofit2:retrofit| 2.1.0
 |com.squareup.retrofit2:converter-gson | 2.1.0
 |de.greenrobot:eventbus| 3.0.0
-|com.google.dagger:dagger| 2.0
+|com.google.dagger:dagger| 2.7
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf-java|3.0.0
 
