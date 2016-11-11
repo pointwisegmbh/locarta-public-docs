@@ -9,7 +9,7 @@
 
 ### 1) Declare dependencies
 
-Open the `build.gradle` file of your project and update the repository and dependency blocks as follows:
+Open the `app/build.gradle` file of your project and update the repository and dependency blocks as follows:
 ```gradle
      repositories {
         // ... other project repositories
@@ -38,8 +38,6 @@ Where `$YOUR_USERNAME$` and `$YOUR_PASSWORD$` are the credentials to the nexus r
 
 `$LOCARTA_SDK_VERSION$` is the SDK version number you wish to use.
 Sync `build.gradle`, rebuild your project and import `co.locarta.sdk.LocartaSDK` into your app.
-
-We advise to use `https` in the repository url (e.g. `https://nexus.locarta.co/..., we intentinally keep http to avoid certain problems with specific java versions.)
 
 ### 2) Set Publisher Key
 
@@ -197,11 +195,11 @@ dependencies {
    compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
        transitive = true;
        exclude group: "com.google.android.gms", module: "play-services-gcm"
-        exclude group: "com.google.android.gms", module: "play-services-location"
+       exclude group: "com.google.android.gms", module: "play-services-location"
    }
 
    compile "com.google.android.gms:play-services-gcm:$PLAY_SERVICES_VERSION$"
-  compile "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$"
+   compile "com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$"
 }  
 ```
 
