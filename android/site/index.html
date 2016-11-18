@@ -129,7 +129,7 @@
 <h2 id="setup">Setup</h2>
 <hr />
 <h3 id="1-declare-dependencies">1) Declare dependencies</h3>
-<p>Open the <code>build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
+<p>Open the <code>app/build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
 <pre><code class="gradle">     repositories {
         // ... other project repositories
         maven {
@@ -156,7 +156,6 @@
 <em>They match with the credentials you got to get access to this documentation</em>.</p>
 <p><code>$LOCARTA_SDK_VERSION$</code> is the SDK version number you wish to use.
 Sync <code>build.gradle</code>, rebuild your project and import <code>co.locarta.sdk.LocartaSDK</code> into your app.</p>
-<p>We advise to use <code>https</code> in the repository url (e.g. `https://nexus.locarta.co/..., we intentinally keep http to avoid certain problems with specific java versions.)</p>
 <h3 id="2-set-publisher-key">2) Set Publisher Key</h3>
 <p>Add a <code>&lt;meta-data&gt;</code> tag to the <code>AndroidManifest.xml</code> of your project:</p>
 <pre><code class="xml">    &lt;application&gt;
@@ -301,11 +300,11 @@ call this method to split the SDK's notifications from yours:</p>
 <tbody>
 <tr>
 <td>com.google.android.gms:play-services-location</td>
-<td>9.6.1</td>
+<td>9.8.0</td>
 </tr>
 <tr>
 <td>com.google.android.gms:play-services-gcm</td>
-<td>9.6.1</td>
+<td>9.8.0</td>
 </tr>
 <tr>
 <td>com.google.code.gson:gson</td>
@@ -329,7 +328,7 @@ call this method to split the SDK's notifications from yours:</p>
 </tr>
 <tr>
 <td>com.google.dagger:dagger</td>
-<td>2.0</td>
+<td>2.7</td>
 </tr>
 <tr>
 <td>ch.hsr:geohash</td>
@@ -347,11 +346,11 @@ call this method to split the SDK's notifications from yours:</p>
    compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
        transitive = true;
        exclude group: &quot;com.google.android.gms&quot;, module: &quot;play-services-gcm&quot;
-        exclude group: &quot;com.google.android.gms&quot;, module: &quot;play-services-location&quot;
+       exclude group: &quot;com.google.android.gms&quot;, module: &quot;play-services-location&quot;
    }
 
    compile &quot;com.google.android.gms:play-services-gcm:$PLAY_SERVICES_VERSION$&quot;
-  compile &quot;com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$&quot;
+   compile &quot;com.google.android.gms:play-services-location:$PLAY_SERVICES_VERSION$&quot;
 }  
 </code></pre>
 
@@ -421,5 +420,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-11-01 10:36:19.606925
+Build Date UTC : 2016-11-18 12:46:15.079423
 -->
