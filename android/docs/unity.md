@@ -1,9 +1,9 @@
 # Locarta Unity SDK 
 
 
-| Latest Version | Size | Min Unity version | Release Date
-| ------------- |  ------------- | -------------  | ------------- 
-| 1.3.1 | 5.7M | 5.x | 21/11/2016|
+| Latest Version | Size | Min Unity version | Release Date | MD5 checksum
+| ------------- |  ------------- | -------------  | -------------  | -------------
+| 1.3.1 | 5.7M | 5.x | 21/11/2016|  294fc6e39924097e59252b774c7f1057 
 
 The Locarta SDK can be integrated through a Unity plugin. 
 
