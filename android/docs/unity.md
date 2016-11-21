@@ -3,7 +3,7 @@
 
 | Latest Version | Size | Min Unity version | Release Date
 | ------------- |  ------------- | -------------  | ------------- 
-| 1.1.1 | 5.7M | 5.x | 25/08/2016|
+| 1.3.1 | 5.7M | 5.x | 21/11/2016|
 
 The Locarta SDK can be integrated through a Unity plugin. 
 
@@ -22,7 +22,7 @@ To get started you will need (to be provided separately):
 Download the archive:
 
 ```
-https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.1.1.zip
+https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.3.1.zip
 ```
 
 When prompted for authentication, use the credentials mentioned above.
@@ -33,7 +33,7 @@ For example:
 
 ```sh
 # works from the project root if ./Assets/Plugins/Android foder already exists
-unzip locarta-sdk-unity-1.1.1.zip -d ./Assets/Plugins/Android
+unzip locarta-sdk-unity-1.3.1.zip -d ./Assets/Plugins/Android
 ``` 
 
 
@@ -112,7 +112,3 @@ The set of minimal permissions embedded in the Locarta SDK is:
 We expect a battery impact of roughly 2-3%.
 
 Normally we use about 1MB/week of mobile data (depending on how long the phone is connected to wifi).
-
-
-
-
