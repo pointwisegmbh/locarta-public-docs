@@ -89,10 +89,20 @@ if (!locartaSdk.CallStatic<bool> ("isAgreementAccepted", activity)) {
   }
 ```
 
+### 5) User Opt-Out
+
+If you need to turn off SDK manually and do not allow it to restart, you can use the following method:
+
+```cs
+   AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
+   locartaSdk.CallStatic("setAgreementAccepted", context, false);
+```
+
 ## Integration Information 
 
 ------
 
+In case Target SDK Version >= 23 we rely on the fact that `Access Fine Location` / `Access Coarse Location` permisions are handeled by the host app (e.g. pop-out permission dialog is shown to the user).
 
 The set of minimal permissions embedded in the Locarta SDK is:
 
