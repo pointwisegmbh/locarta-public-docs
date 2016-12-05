@@ -48,24 +48,60 @@ pid=<YOUR PUBLISHER ID>
 ```
 
 
-### 3) Initialise SDK on App Start
+### 3) Set up Android manifest
 
-```cs
-public class MainScene : MonoBehaviour {
+Add a file named `AndroidManifest.xml` to the `./Assets/Plugins/Android` folder.
 
-	// Use the method for the initialisation
-	void Start () {
-    		// Get context
-	   		AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
-    		AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+Set the file contents to the following:
 
-    		// Initialize SDK
-			AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
-			locartaSdk.CallStatic("initialize", activity);
-		}
-	}
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.unity3d.player"
+	android:installLocation="preferExternal"
+    android:versionCode="1"
+    android:versionName="1.0">
+    <supports-screens
+        android:smallScreens="true"
+        android:normalScreens="true"
+        android:largeScreens="true"
+        android:xlargeScreens="true"
+        android:anyDensity="true"/>
+
+    <application
+		android:theme="@style/UnityThemeSelector"
+		android:icon="@drawable/app_icon"
+        android:label="@string/app_name"
+        android:name="co.locarta.sdk.LocartaSdkApplication"
+        android:debuggable="true">
+        <activity android:name="com.unity3d.player.UnityPlayerActivity"
+                  android:label="@string/app_name">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <meta-data android:name="unityplayer.UnityActivity" android:value="true" />
+        </activity>
+    </application>
+</manifest>
 ```
 
+If some other 3rd party Android library requires you to have a custom Android application class, then please create a new [library project](https://developer.android.com/studio/projects/index.html#LibraryProjects) which contains both libraries, and add a custom application class and initialize the SDK there with the following code:
+
+```java
+// Add this line to the header of your file
+import co.locarta.sdk.LocartaSdk;
+
+public class SdkDemoApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // Initialise SDK on App creation
+        LocartaSdk.initialize(getApplicationContext());
+    }
+}
+```
 
 ### 4) Obtain User Opt-In
 
@@ -75,18 +111,23 @@ a) Via an API call (if your application has its own agreement dialog or complian
 
 ```cs
 // Accepting SDK agreements
+AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
-locartaSdk.CallStatic("setAgreementAccepted", context, true);
+locartaSdk.CallStatic("setAgreementAccepted", activity, true);
 ```
 
 b) Via the default Locarta agreement dialog:
 
 ```cs
+AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
 if (!locartaSdk.CallStatic<bool> ("isAgreementAccepted", activity)) {
       activity.Call ("runOnUiThread", new AndroidJavaRunnable (() => {
           locartaSdk.CallStatic<AndroidJavaObject> ("showAgreementDialog", activity);
       }));
-  }
+}
 ```
 
 ### 5) User Opt-Out
@@ -94,8 +135,11 @@ if (!locartaSdk.CallStatic<bool> ("isAgreementAccepted", activity)) {
 If you need to turn off SDK manually and do not allow it to restart, you can use the following method:
 
 ```cs
-   AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
-   locartaSdk.CallStatic("setAgreementAccepted", context, false);
+AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
+AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
+AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
+locartaSdk.CallStatic("setAgreementAccepted", activity, false);
 ```
 
 ### 6) Push notifications
@@ -105,19 +149,19 @@ call a special method to split the SDK's notifications from yours. You need to c
 where you are listening for incoming notifications. You can use this code:
 
 ```cs
-    // var message = "sample"; // assuming this is a received message, according
-    // to default GCM implementation this can be taken from android.os.Bundle
-    // class in broadcast receiver by a key "default", i.e. bundle.getString("default", null)
-    using (var bundle = new AndroidJavaObject ("android.os.Bundle")) {
-        bundle.Call ("putString", "default", message);
-        using (var sdk = new AndroidJavaClass ("co.locarta.sdk.LocartaSdk")) {
-            if (!sdk.CallStatic<bool> ("handleMessage", bundle)) {
-                // handle your push notification
-            } else {
-                // do nothing, the notification belongs to the SDK
-            }
+// var message = "sample"; // assuming this is a received message, according
+// to default GCM implementation this can be taken from android.os.Bundle
+// class in broadcast receiver by a key "default", i.e. bundle.getString("default", null)
+using (var bundle = new AndroidJavaObject ("android.os.Bundle")) {
+    bundle.Call ("putString", "default", message);
+    using (var sdk = new AndroidJavaClass ("co.locarta.sdk.LocartaSdk")) {
+        if (!sdk.CallStatic<bool> ("handleMessage", bundle)) {
+            // handle your push notification
+        } else {
+            // do nothing, the notification belongs to the SDK
         }
     }
+}
 ```
 
 
