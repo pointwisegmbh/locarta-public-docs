@@ -3,7 +3,7 @@
 
 | Latest Version | Size | Min Unity version | Release Date | MD5 checksum
 | ------------- |  ------------- | -------------  | -------------  | -------------
-| 1.3.1 | 5.7M | 5.x | 21/11/2016|  294fc6e39924097e59252b774c7f1057
+| 1.3.2 | 6.3M | 5.x | 06/12/2016 |  294fc6e39924097e59252b774c7f1057
 
 The Locarta SDK can be integrated through a Unity plugin.
 
@@ -22,7 +22,7 @@ To get started you will need (to be provided separately):
 Download the archive:
 
 ```
-https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.3.1.zip
+https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.3.2.zip
 ```
 
 When prompted for authentication, use the credentials mentioned above.
@@ -33,7 +33,7 @@ For example:
 
 ```sh
 # works from the project root if ./Assets/Plugins/Android foder already exists
-unzip locarta-sdk-unity-1.3.1.zip -d ./Assets/Plugins/Android
+unzip locarta-sdk-unity-1.3.2.zip -d ./Assets/Plugins/Android
 ```
 
 
@@ -113,6 +113,7 @@ a) Via an API call (if your application has its own agreement dialog or complian
 // Accepting SDK agreements
 AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
+
 AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
 locartaSdk.CallStatic("setAgreementAccepted", activity, true);
 ```
@@ -123,6 +124,7 @@ b) Via the default Locarta agreement dialog:
 AndroidJavaClass unityPlayer = new AndroidJavaClass("com.unity3d.player.UnityPlayer");
 AndroidJavaObject activity = unityPlayer.GetStatic<AndroidJavaObject>("currentActivity");
 
+AndroidJavaClass locartaSdk = new AndroidJavaClass("co.locarta.sdk.LocartaSdk");
 if (!locartaSdk.CallStatic<bool> ("isAgreementAccepted", activity)) {
       activity.Call ("runOnUiThread", new AndroidJavaRunnable (() => {
           locartaSdk.CallStatic<AndroidJavaObject> ("showAgreementDialog", activity);
