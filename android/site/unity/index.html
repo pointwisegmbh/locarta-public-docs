@@ -120,15 +120,15 @@
 </thead>
 <tbody>
 <tr>
-<td>1.3.1</td>
-<td>5.7M</td>
+<td>1.3.2</td>
+<td>6.3M</td>
 <td>5.x</td>
-<td>21/11/2016</td>
+<td>06/12/2016</td>
 <td>294fc6e39924097e59252b774c7f1057</td>
 </tr>
 </tbody>
 </table>
-<p>The Locarta SDK can be integrated through a Unity plugin. </p>
+<p>The Locarta SDK can be integrated through a Unity plugin.</p>
 <p>We currently support v5.x or higher of the Unity Framework.</p>
 <p>To get started you will need (to be provided separately):
 <em>  Publisher ID
@@ -137,14 +137,14 @@
 <hr />
 <h3 id="1-download-and-install-plugin">1) Download and install plugin</h3>
 <p>Download the archive:</p>
-<pre><code>https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.3.1.zip
+<pre><code>https://static.locarta.co/locarta-sdk-unity/locarta-sdk-unity-1.3.2.zip
 </code></pre>
 
 <p>When prompted for authentication, use the credentials mentioned above.</p>
 <p>Once downloaded, unzip the contents to the folder <code>./Assets/Plugins/Android</code></p>
 <p>For example:</p>
 <pre><code class="sh"># works from the project root if ./Assets/Plugins/Android foder already exists
-unzip locarta-sdk-unity-1.3.1.zip -d ./Assets/Plugins/Android
+unzip locarta-sdk-unity-1.3.2.zip -d ./Assets/Plugins/Android
 </code></pre>
 
 <h3 id="2-set-publisher-key">2) Set publisher key</h3>
@@ -153,40 +153,109 @@ unzip locarta-sdk-unity-1.3.1.zip -d ./Assets/Plugins/Android
 <pre><code>pid=&lt;YOUR PUBLISHER ID&gt;
 </code></pre>
 
-<h3 id="3-initialise-sdk-on-app-start">3) Initialise SDK on App Start</h3>
-<pre><code class="cs">public class MainScene : MonoBehaviour {
+<h3 id="3-set-up-android-manifest">3) Set up Android manifest</h3>
+<p>Add a file named <code>AndroidManifest.xml</code> to the <code>./Assets/Plugins/Android</code> folder.</p>
+<p>Set the file contents to the following:</p>
+<pre><code class="xml">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;manifest
+    xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+    package=&quot;com.unity3d.player&quot;
+    android:installLocation=&quot;preferExternal&quot;
+    android:versionCode=&quot;1&quot;
+    android:versionName=&quot;1.0&quot;&gt;
+    &lt;supports-screens
+        android:smallScreens=&quot;true&quot;
+        android:normalScreens=&quot;true&quot;
+        android:largeScreens=&quot;true&quot;
+        android:xlargeScreens=&quot;true&quot;
+        android:anyDensity=&quot;true&quot;/&gt;
 
-    // Use the method for the initialisation    
-    void Start () {
-            // Get context
-            AndroidJavaClass unityPlayer = new AndroidJavaClass(&quot;com.unity3d.player.UnityPlayer&quot;);
-            AndroidJavaObject activity = unityPlayer.GetStatic&lt;AndroidJavaObject&gt;(&quot;currentActivity&quot;);
+    &lt;application
+        android:theme=&quot;@style/UnityThemeSelector&quot;
+        android:icon=&quot;@drawable/app_icon&quot;
+        android:label=&quot;@string/app_name&quot;
+        android:name=&quot;co.locarta.sdk.LocartaSdkApplication&quot;
+        android:debuggable=&quot;true&quot;&gt;
+        &lt;activity android:name=&quot;com.unity3d.player.UnityPlayerActivity&quot;
+                  android:label=&quot;@string/app_name&quot;&gt;
+            &lt;intent-filter&gt;
+                &lt;action android:name=&quot;android.intent.action.MAIN&quot; /&gt;
+                &lt;category android:name=&quot;android.intent.category.LAUNCHER&quot; /&gt;
+            &lt;/intent-filter&gt;
+            &lt;meta-data android:name=&quot;unityplayer.UnityActivity&quot; android:value=&quot;true&quot; /&gt;
+        &lt;/activity&gt;
+    &lt;/application&gt;
+&lt;/manifest&gt;
+</code></pre>
 
-            // Initialize SDK
-            AndroidJavaClass locartaSdk = new AndroidJavaClass(&quot;co.locarta.sdk.LocartaSdk&quot;);
-            locartaSdk.CallStatic(&quot;initialize&quot;, activity);
-        }
-    }   
+<p>If some other 3rd party Android library requires you to have a custom Android application class, then please create a new <a href="https://developer.android.com/studio/projects/index.html#LibraryProjects">library project</a> which contains both libraries, and add a custom application class and initialize the SDK there with the following code:</p>
+<pre><code class="java">// Add this line to the header of your file
+import co.locarta.sdk.LocartaSdk;
+
+public class SdkDemoApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        // Initialise SDK on App creation
+        LocartaSdk.initialize(getApplicationContext());
+    }
+}
 </code></pre>
 
 <h3 id="4-obtain-user-opt-in">4) Obtain User Opt-In</h3>
 <p>Users must opt in to Locarta's market research programme for the SDK to start working. This can be done either:</p>
 <p>a) Via an API call (if your application has its own agreement dialog or compliant privacy policy):</p>
-<pre><code class="cs">// Accepting SDK agreements 
+<pre><code class="cs">// Accepting SDK agreements
+AndroidJavaClass unityPlayer = new AndroidJavaClass(&quot;com.unity3d.player.UnityPlayer&quot;);
+AndroidJavaObject activity = unityPlayer.GetStatic&lt;AndroidJavaObject&gt;(&quot;currentActivity&quot;);
+
 AndroidJavaClass locartaSdk = new AndroidJavaClass(&quot;co.locarta.sdk.LocartaSdk&quot;);
-locartaSdk.CallStatic(&quot;setAgreementAccepted&quot;, context, true);
+locartaSdk.CallStatic(&quot;setAgreementAccepted&quot;, activity, true);
 </code></pre>
 
 <p>b) Via the default Locarta agreement dialog:</p>
-<pre><code class="cs">if (!locartaSdk.CallStatic&lt;bool&gt; (&quot;isAgreementAccepted&quot;, activity)) {
-      activity.Call (&quot;runOnUiThread&quot;, new AndroidJavaRunnable (() =&gt; { 
+<pre><code class="cs">AndroidJavaClass unityPlayer = new AndroidJavaClass(&quot;com.unity3d.player.UnityPlayer&quot;);
+AndroidJavaObject activity = unityPlayer.GetStatic&lt;AndroidJavaObject&gt;(&quot;currentActivity&quot;);
+
+AndroidJavaClass locartaSdk = new AndroidJavaClass(&quot;co.locarta.sdk.LocartaSdk&quot;);
+if (!locartaSdk.CallStatic&lt;bool&gt; (&quot;isAgreementAccepted&quot;, activity)) {
+      activity.Call (&quot;runOnUiThread&quot;, new AndroidJavaRunnable (() =&gt; {
           locartaSdk.CallStatic&lt;AndroidJavaObject&gt; (&quot;showAgreementDialog&quot;, activity);
       }));
-  }
+}
+</code></pre>
+
+<h3 id="5-user-opt-out">5) User Opt-Out</h3>
+<p>If you need to turn off SDK manually and do not allow it to restart, you can use the following method:</p>
+<pre><code class="cs">AndroidJavaClass unityPlayer = new AndroidJavaClass(&quot;com.unity3d.player.UnityPlayer&quot;);
+AndroidJavaObject activity = unityPlayer.GetStatic&lt;AndroidJavaObject&gt;(&quot;currentActivity&quot;);
+
+AndroidJavaClass locartaSdk = new AndroidJavaClass(&quot;co.locarta.sdk.LocartaSdk&quot;);
+locartaSdk.CallStatic(&quot;setAgreementAccepted&quot;, activity, false);
+</code></pre>
+
+<h3 id="6-push-notifications">6) Push notifications</h3>
+<p>If you use Google Cloud Messaging to send push notifications to your application, please
+call a special method to split the SDK's notifications from yours. You need to call that method in a place
+where you are listening for incoming notifications. You can use this code:</p>
+<pre><code class="cs">// var message = &quot;sample&quot;; // assuming this is a received message, according
+// to default GCM implementation this can be taken from android.os.Bundle
+// class in broadcast receiver by a key &quot;default&quot;, i.e. bundle.getString(&quot;default&quot;, null)
+using (var bundle = new AndroidJavaObject (&quot;android.os.Bundle&quot;)) {
+    bundle.Call (&quot;putString&quot;, &quot;default&quot;, message);
+    using (var sdk = new AndroidJavaClass (&quot;co.locarta.sdk.LocartaSdk&quot;)) {
+        if (!sdk.CallStatic&lt;bool&gt; (&quot;handleMessage&quot;, bundle)) {
+            // handle your push notification
+        } else {
+            // do nothing, the notification belongs to the SDK
+        }
+    }
+}
 </code></pre>
 
 <h2 id="integration-information">Integration Information</h2>
 <hr />
+<p>In case Target SDK Version &gt;= 23 we rely on the fact that <code>Access Fine Location</code> / <code>Access Coarse Location</code> permisions are handeled by the host app (e.g. pop-out permission dialog is shown to the user).</p>
 <p>The set of minimal permissions embedded in the Locarta SDK is:</p>
 <table>
 <thead>
