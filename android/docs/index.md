@@ -214,6 +214,21 @@ If you see the message: `Can't find referenced class from the SDK`, add these li
 ```
 
 
+
+#### Robolectric
+
+If you see the message: `Conflict with dependency 'com.google.protobuf:protobuf-java'. Resolved versions for app (3.1.0) and test app (2.6.1)`, then please replace Robolectric dependency in `build.gradle` file with these lines:
+
+```
+testCompile("org.robolectric:robolectric:3.1.2") {
+    exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano'
+}
+testCompile("org.robolectric:shadows-multidex:3.1") {
+    exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano’
+}
+```
+
+
 #### Downgrading min SDK version to API v7
 
 Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.
