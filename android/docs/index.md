@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.4.2 | 249.19 KB | 7 (2.1  Eclair) | 5/01/2016
+| 1.4.3 | 250.99 KB | 7 (2.1  Eclair) | 23/01/2016
 
 ## Setup
 ------
@@ -224,7 +224,7 @@ If you see the message: `Can't find referenced class from the SDK`, add these li
 
 #### Robolectric
 
-If you see the message: `Conflict with dependency 'com.google.protobuf:protobuf-java'. Resolved versions for app (3.1.0) and test app (2.6.1)`, then please replace Robolectric dependency in `build.gradle` file with these lines:
+If you see the message: `Conflict with dependency 'com.google.protobuf:protobuf-java'. Resolved versions for app (3.1.0) and test app (2.6.1)`, then replace Robolectric dependency in `build.gradle` file with these lines:
 
 ```
 testCompile("org.robolectric:robolectric:3.1.2") {
