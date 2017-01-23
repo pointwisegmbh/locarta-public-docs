@@ -75,14 +75,21 @@ Example:
 
 ### 4) Obtain User Opt-In
 
-The SDK will not start working until the user has opted in – this needs to be done only once per user. You can do it like this:
+The SDK will not start working until the user has opted in – this needs to be done only once per user. There are two ways to do it, depending on how the opt-in is gathered:
 
+a) Implicit opt-in (if you've added Locarta info to your app's privacy policy):
 ```java
     // Put this code in your Application.onCreate() function, after LocartaSdk.initialize()
     if(!LocartaSdk.isAgreementAccepted(getContext())) {
         LocartaSdk.setAgreementAccepted(getContext(), true);
     }
 ```
+a) Explicit opt-in (if you want to show a popup agreement dialog prompting users to opt in):
+```java
+    // Put this code somewhere in the main activities to show the dialog
+    LocartaSdk.showAgreementDialog(getActivity());
+```
+
 
 If you want to check whether the user has opted in, call:
 ```java
