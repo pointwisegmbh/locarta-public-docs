@@ -119,10 +119,10 @@
 </thead>
 <tbody>
 <tr>
-<td>1.3.4</td>
-<td>502 KB</td>
+<td>1.4.4</td>
+<td>251.05 KB</td>
 <td>7 (2.1  Eclair)</td>
-<td>14/12/2016</td>
+<td>26/01/2016</td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +145,7 @@
      // ...
      dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.3.+
+        // We recommend to set version as: 1.4.+
         compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
@@ -312,7 +312,7 @@ call this method to split the SDK's notifications from yours:</p>
 </tr>
 <tr>
 <td>io.reactivex:rxjava</td>
-<td>1.1.8</td>
+<td>1.2.4</td>
 </tr>
 <tr>
 <td>com.squareup.retrofit2:retrofit</td>
@@ -323,20 +323,16 @@ call this method to split the SDK's notifications from yours:</p>
 <td>2.1.0</td>
 </tr>
 <tr>
-<td>de.greenrobot:eventbus</td>
-<td>3.0.0</td>
-</tr>
-<tr>
 <td>com.google.dagger:dagger</td>
-<td>2.7</td>
+<td>2.8</td>
 </tr>
 <tr>
 <td>ch.hsr:geohash</td>
 <td>1.0.13</td>
 </tr>
 <tr>
-<td>com.google.protobuf-java</td>
-<td>3.0.0</td>
+<td>com.google.protobuf.nano:protobuf-javanano</td>
+<td>3.1.0</td>
 </tr>
 </tbody>
 </table>
@@ -363,6 +359,16 @@ call this method to split the SDK's notifications from yours:</p>
 -dontwarn com.google.common.base.Function
 -dontwarn com.google.common.collect.Lists
 -dontwarn com.google.common.io.BaseEncoding
+</code></pre>
+
+<h4 id="robolectric">Robolectric</h4>
+<p>If you see the message: <code>Conflict with dependency 'com.google.protobuf:protobuf-java'. Resolved versions for app (3.1.0) and test app (2.6.1)</code>, then replace Robolectric dependency in <code>build.gradle</code> file with these lines:</p>
+<pre><code>testCompile(&quot;org.robolectric:robolectric:3.1.2&quot;) {
+    exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano'
+}
+testCompile(&quot;org.robolectric:shadows-multidex:3.1&quot;) {
+    exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano’
+}
 </code></pre>
 
 <h4 id="downgrading-min-sdk-version-to-api-v7">Downgrading min SDK version to API v7</h4>
@@ -420,5 +426,5 @@ call this method to split the SDK's notifications from yours:</p>
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2016-12-15 08:54:48.167234
+Build Date UTC : 2017-01-26 18:20:41.119084
 -->
