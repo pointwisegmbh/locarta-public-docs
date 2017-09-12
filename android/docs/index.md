@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.7.0 | 369.63 KB | 7 (2.1  Eclair) | 06/09/2017
+| 1.7.1 | 368.91 KB | 14 (4.0  Ice cream sandwich) | 12/09/2017
 
 ## Setup
 ------
@@ -175,13 +175,13 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 
 | Dependency | Version
 | ------------- |  -------------
-|com.google.android.gms:play-services-location | 10.2.0
-|com.google.android.gms:play-services-gcm | 10.2.0
+|com.google.android.gms:play-services-location | 11.2.2
+|com.google.android.gms:play-services-gcm | 11.2.2
 |com.google.code.gson:gson | 2.8.1
-|io.reactivex:rxjava | 1.2.4
-|com.squareup.retrofit2:retrofit| 2.2.0
-|com.squareup.retrofit2:converter-gson | 2.2.0
-|com.google.dagger:dagger| 2.10
+|io.reactivex:rxjava | 1.3.1
+|com.squareup.retrofit2:retrofit| 2.3.0
+|com.squareup.retrofit2:converter-gson | 2.3.0
+|com.google.dagger:dagger| 2.11
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf.nano:protobuf-javanano|3.1.0
 
@@ -232,20 +232,4 @@ testCompile("org.robolectric:robolectric:3.1.2") {
 testCompile("org.robolectric:shadows-multidex:3.1") {
     exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano’
 }
-```
-
-
-#### Downgrading min SDK version to API v7
-
-Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.
-
-If you get an error saying:
-```
-Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary="com.google.android.gms" to force usage
-```
-
-Then add this line to the manifest of your application:
-
-```xml
-<uses-sdk tools:overrideLibrary="com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid"/>
 ```
