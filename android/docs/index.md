@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.7.1 | 368.91 KB | 14 (4.0  Ice cream sandwich) | 12/09/2017
+| 1.7.2 | 368.91 KB | 14 (4.0  Ice cream sandwich) | 12/09/2017
 
 ## Setup
 ------
