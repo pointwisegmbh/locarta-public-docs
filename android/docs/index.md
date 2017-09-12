@@ -184,6 +184,7 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |com.google.dagger:dagger| 2.11
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf.nano:protobuf-javanano|3.1.0
+|com.android.support:support-compat|26.0.2
 
 #### Exclude dependencies
 
