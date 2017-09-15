@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.7.2 | 368.91 KB | 14 (4.0  Ice cream sandwich) | 12/09/2017
+| 1.7.5 | 387.13 KB | 14 (4.0  Ice cream sandwich) | 15/09/2017
 
 ## Setup
 ------
@@ -184,7 +184,6 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |com.google.dagger:dagger| 2.11
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf.nano:protobuf-javanano|3.1.0
-|com.android.support:support-compat|26.0.2
 
 #### Exclude dependencies
 
