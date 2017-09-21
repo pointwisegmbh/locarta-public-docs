@@ -119,10 +119,10 @@
 </thead>
 <tbody>
 <tr>
-<td>1.4.4</td>
-<td>251.05 KB</td>
-<td>7 (2.1  Eclair)</td>
-<td>26/01/2016</td>
+<td>1.7.6</td>
+<td>388.71 KB</td>
+<td>14 (4.0  Ice cream sandwich)</td>
+<td>21/09/2017</td>
 </tr>
 </tbody>
 </table>
@@ -145,7 +145,7 @@
      // ...
      dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.4.+
+        // We recommend to set version as: 1.7.+
         compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
             transitive = true;
         }
@@ -300,31 +300,31 @@ call this method to split the SDK's notifications from yours:</p>
 <tbody>
 <tr>
 <td>com.google.android.gms:play-services-location</td>
-<td>9.8.0</td>
+<td>11.2.2</td>
 </tr>
 <tr>
 <td>com.google.android.gms:play-services-gcm</td>
-<td>9.8.0</td>
+<td>11.2.2</td>
 </tr>
 <tr>
 <td>com.google.code.gson:gson</td>
-<td>2.7</td>
+<td>2.8.1</td>
 </tr>
 <tr>
 <td>io.reactivex:rxjava</td>
-<td>1.2.4</td>
+<td>1.3.1</td>
 </tr>
 <tr>
 <td>com.squareup.retrofit2:retrofit</td>
-<td>2.1.0</td>
+<td>2.3.0</td>
 </tr>
 <tr>
 <td>com.squareup.retrofit2:converter-gson</td>
-<td>2.1.0</td>
+<td>2.3.0</td>
 </tr>
 <tr>
 <td>com.google.dagger:dagger</td>
-<td>2.8</td>
+<td>2.11</td>
 </tr>
 <tr>
 <td>ch.hsr:geohash</td>
@@ -369,16 +369,6 @@ call this method to split the SDK's notifications from yours:</p>
 testCompile(&quot;org.robolectric:shadows-multidex:3.1&quot;) {
     exclude group: 'com.google.protobuf.nano', module: 'protobuf-javanano’
 }
-</code></pre>
-
-<h4 id="downgrading-min-sdk-version-to-api-v7">Downgrading min SDK version to API v7</h4>
-<p>Technically the minimum API version for the SDK is already v7. However, it depends on Google Play Services, which requires minimum API v9.</p>
-<p>If you get an error saying:</p>
-<pre><code>Manifest merger failed : uses-sdk:minSdkVersion 7 cannot be smaller than version 9 declared in library [com.google.android.gms:play-services-location:9.4.0] Suggestion: use tools:overrideLibrary=&quot;com.google.android.gms&quot; to force usage
-</code></pre>
-
-<p>Then add this line to the manifest of your application:</p>
-<pre><code class="xml">&lt;uses-sdk tools:overrideLibrary=&quot;com.google.android.gms, com.google.android.gms.base, com.google.android.gms.tasks, com.google.android.gms.gcm, com.google.android.gms.iid&quot;/&gt;
 </code></pre></div>
             
         </div>
@@ -426,5 +416,5 @@ testCompile(&quot;org.robolectric:shadows-multidex:3.1&quot;) {
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2017-01-26 18:20:41.119084
+Build Date UTC : 2017-09-21 10:11:30.829012
 -->
