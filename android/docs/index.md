@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 1.7.6 | 388.71 KB | 14 (4.0  Ice cream sandwich) | 21/09/2017
+| 2.0.0 | 493.68 KB | 14 (4.0  Ice cream sandwich) | 24/10/2017
 
 ## Setup
 ------
@@ -26,7 +26,7 @@ Open the `app/build.gradle` file of your project and update the repository and d
      // ...
  	 dependencies {
         // ... other project dependencies
-        // We recommend to set version as: 1.7.+
+        // We recommend to set version as: 2.0.+
         compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
             transitive = true;
         }
