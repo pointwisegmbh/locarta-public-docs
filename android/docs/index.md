@@ -24,7 +24,7 @@ Open the `app/build.gradle` file of your project and update the repository and d
       }
 
       // ...
- 	 dependencies {
+      dependencies {
           // ... other project dependencies
           // We recommend to set version as: 2.0.+
           compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
