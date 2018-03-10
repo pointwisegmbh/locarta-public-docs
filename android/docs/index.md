@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 2.1.0 | 530.77 KB | 14 (4.0  Ice cream sandwich) | 17/02/2018
+| 2.1.1 | 533.76 KB | 14 (4.0  Ice cream sandwich) | 10/03/2018
 
 ## Setup
 ------
@@ -175,8 +175,8 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 
 | Dependency | Version
 | ------------- |  -------------
-|com.google.android.gms:play-services-location | 11.4.0
-|com.google.android.gms:play-services-gcm | 11.4.0
+|com.google.android.gms:play-services-location | 11.8.0
+|com.google.android.gms:play-services-gcm | 11.8.0
 |com.google.code.gson:gson | 2.8.1
 |io.reactivex:rxjava | 1.3.1
 |com.squareup.retrofit2:retrofit| 2.3.0
