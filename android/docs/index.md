@@ -12,25 +12,25 @@
 Open the `app/build.gradle` file of your project and update the repository and dependency blocks as follows:
 ```gradle
      repositories {
-        // ... other project repositories
-        maven {
-            url "http://nexus.locarta.co/content/repositories/android-sdk/"
-            credentials {
-               username = "$YOUR_USERNAME$"
-               password = "$YOUR_PASSWORD$"
-            }
-        }
-        // Repository will be provided separately
-     }
+         // ... other project repositories
+         maven {
+             url "http://nexus.locarta.co/content/repositories/android-sdk/"
+             credentials {
+                 username = "$YOUR_USERNAME$"
+                 password = "$YOUR_PASSWORD$"
+             }
+         }
+         // Repository will be provided separately
+      }
 
-     // ...
+      // ...
  	 dependencies {
-        // ... other project dependencies
-        // We recommend to set version as: 2.0.+
-        compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
-            transitive = true;
-        }
-     }
+          // ... other project dependencies
+          // We recommend to set version as: 2.0.+
+          compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
+              transitive = true;
+          }
+      }
 ```     
 
 Where `$YOUR_USERNAME$` and `$YOUR_PASSWORD$` are the credentials to the nexus repository.
