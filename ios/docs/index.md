@@ -1,4 +1,4 @@
-# Locarta Android SDK
+# Locarta iOS SDK
 
 | Latest Version | Size | Requirements | Release Date
 | ------------- |  ------------- | -------------  | -------------
@@ -59,6 +59,6 @@ Implement the following method in your `AppDelegate` and replace `YOUR_PUBLISHER
 func application(_ application: UIApplication,
                  didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     try? LocartaSDK.shared.initialize(configuration: SdkConfiguration(publisherId: "YOUR_PUBLISHER_ID"))
-    true
+    return true
 }
 ```
