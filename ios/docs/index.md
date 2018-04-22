@@ -53,8 +53,12 @@ LocartaSDK.shared.setAgreementAccepted(isAccepted: true)
 
 ### Initialise the SDK
 
-Please do replace `YOUR_PUBLISHER_ID` with your Locarta publisher id.
+Implement the following method in your `AppDelegate` and replace `YOUR_PUBLISHER_ID` with your Locarta publisher id:
 
 ```swift
-try? LocartaSDK.shared.initialize(configuration: SdkConfiguration(publisherId: "YOUR_PUBLISHER_ID"))
+func application(_ application: UIApplication,
+                 didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    try? LocartaSDK.shared.initialize(configuration: SdkConfiguration(publisherId: "YOUR_PUBLISHER_ID"))
+    true
+}
 ```
