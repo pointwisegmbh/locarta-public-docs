@@ -1,3 +1,4 @@
+sdk/site/**
 .vagrant
 Vagrantfile
 .project

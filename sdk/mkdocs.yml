@@ -1,4 +1,5 @@
 site_name: Locarta Android SDK Documentation
 pages:
-  - Home: index.md
-  - Unity Guide: unity.md
+  - Android: index.md
+  - iOS: ios.md
+  - Unity: unity.md
