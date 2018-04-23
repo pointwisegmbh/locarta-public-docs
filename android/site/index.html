@@ -119,10 +119,10 @@
 </thead>
 <tbody>
 <tr>
-<td>2.0.0</td>
-<td>493.68 KB</td>
+<td>2.1.2</td>
+<td>533.75 KB</td>
 <td>14 (4.0  Ice cream sandwich)</td>
-<td>24/10/2017</td>
+<td>18/03/2018</td>
 </tr>
 </tbody>
 </table>
@@ -131,25 +131,25 @@
 <h3 id="1-declare-dependencies">1) Declare dependencies</h3>
 <p>Open the <code>app/build.gradle</code> file of your project and update the repository and dependency blocks as follows:</p>
 <pre><code class="gradle">     repositories {
-        // ... other project repositories
-        maven {
-            url &quot;http://nexus.locarta.co/content/repositories/android-sdk/&quot;
-            credentials {
-               username = &quot;$YOUR_USERNAME$&quot;
-               password = &quot;$YOUR_PASSWORD$&quot;
-            }
-        }
-        // Repository will be provided separately
-     }
+         // ... other project repositories
+         maven {
+             url &quot;http://nexus.locarta.co/content/repositories/android-sdk/&quot;
+             credentials {
+                 username = &quot;$YOUR_USERNAME$&quot;
+                 password = &quot;$YOUR_PASSWORD$&quot;
+             }
+         }
+         // Repository will be provided separately
+      }
 
-     // ...
-     dependencies {
-        // ... other project dependencies
-        // We recommend to set version as: 2.0.+
-        compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
-            transitive = true;
-        }
-     }
+      // ...
+      dependencies {
+          // ... other project dependencies
+          // We recommend to set version as: 2.1.+
+          compile (&quot;co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar&quot;) {
+              transitive = true;
+          }
+      }
 </code></pre>
 
 <p>Where <code>$YOUR_USERNAME$</code> and <code>$YOUR_PASSWORD$</code> are the credentials to the nexus repository.
@@ -300,11 +300,11 @@ call this method to split the SDK's notifications from yours:</p>
 <tbody>
 <tr>
 <td>com.google.android.gms:play-services-location</td>
-<td>11.4.0</td>
+<td>11.8.0</td>
 </tr>
 <tr>
 <td>com.google.android.gms:play-services-gcm</td>
-<td>11.4.0</td>
+<td>11.8.0</td>
 </tr>
 <tr>
 <td>com.google.code.gson:gson</td>
@@ -416,5 +416,5 @@ testCompile(&quot;org.robolectric:shadows-multidex:3.1&quot;) {
 
 <!--
 MkDocs version : 0.15.3
-Build Date UTC : 2017-11-27 15:40:07.947494
+Build Date UTC : 2018-03-19 13:47:37.466187
 -->
