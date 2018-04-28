@@ -48,7 +48,7 @@ func application(_ application: UIApplication,
 The SDK will not start working until the user has opted in – this needs to be done only once per user. You can do this via the SDK's method:
 
 ```swift
-LocartaSDK.shared.setAgreementAccepted(isAccepted: true)
+LocartaSDK.shared.isAgreementAccepted = true
 ```
 
 ### Initialise the SDK
