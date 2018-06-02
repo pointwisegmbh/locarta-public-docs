@@ -2,7 +2,7 @@
 
 | Latest Version | Size | Minimal Android API version | Release Date
 | ------------- |  ------------- | -------------  | -------------
-| 2.1.2 | 533.75 KB | 14 (4.0  Ice cream sandwich) | 18/03/2018
+| 2.1.3 | 510.85 KB | 14 (4.0  Ice cream sandwich) | 02/06/2018
 
 ## Setup
 ------
@@ -181,7 +181,7 @@ The Locarta SDK should be implemented as a transitive @aar dependency. These are
 |io.reactivex:rxjava | 1.3.1
 |com.squareup.retrofit2:retrofit| 2.3.0
 |com.squareup.retrofit2:converter-gson | 2.3.0
-|com.google.dagger:dagger| 2.11
+|com.google.dagger:dagger| 2.16
 |ch.hsr:geohash| 1.0.13
 |com.google.protobuf.nano:protobuf-javanano|3.1.0
 
