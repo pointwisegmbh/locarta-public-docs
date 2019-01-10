@@ -124,13 +124,13 @@ call this method to split the SDK's notifications from yours:
 Please ignore the push notifications addressed to the SDK in your receiver:
 
 ```java
-public class AppGcmListenerService extends GcmListenerService {
+public class AppGcmListenerService extends FirebaseMessagingService {
 
     @Override
-    public void onMessageReceived(String from, Bundle bundle) {
-        if (!LocartaSdk.handleMessage(bundle)) {
+    public void onMessageReceived(RemoteMessage remoteMessage) {
+        if (!LocartaSdk.handleMessage(remoteMessage)) {
           // Normal push notification, your logic comes here
-            Log.i("AppGcmListenerService", String.format("Received message from %s with data %s", from, bundle));
+            Log.i("AppGcmListenerService", String.format("Received message %s", message));
         } else {
           // just ignore this push notification, it is addressed to the SDK
         }
