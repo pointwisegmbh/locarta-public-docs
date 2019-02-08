@@ -1,8 +1,8 @@
 # Locarta Android SDK
 
-| Latest Version | Size | Minimal Android API version | Release Date
+| Latest Version | Size | Minimal Android API version | Release Date 
 | ------------- |  ------------- | -------------  | -------------
-| 780.ebdf8bd | 528 KB | 14 (4.0  Ice cream sandwich) | 10/01/2019
+| 783.2b8ab3e | 528 KB | 14 (4.0  Ice cream sandwich) | 21/01/2019
 
 ## Setup
 ------
@@ -25,9 +25,8 @@ Open the `app/build.gradle` file of your project and update the repository and d
 
       // ...
       dependencies {
-          // ... other project dependencies
-          // We recommend to set version as: 2.1.+
-          compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$:pubProd@aar") {
+          // ... other project dependencies          
+          compile ("co.locarta:locarta-sdk:$LOCARTA_SDK_VERSION$-pubProd@aar") {
               transitive = true;
           }
       }
