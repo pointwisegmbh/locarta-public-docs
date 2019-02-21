@@ -112,15 +112,15 @@ If you need to turn off SDK manually and do not allow it to restart, you can use
 
 ### 6) Push notifications
 
-If you use Google Cloud Messaging to send push notifications to your application, please
-call this method to split the SDK's notifications from yours:
+If you use Google Cloud Messaging to send push notifications to your application, you will need to take some additional steps.
 
-```java
-   // Returns *true* if push notification is addressed to SDK
-   LocartaSdk.handleMessage(Bundle bundle);
-```
+Please make sure you call ```FirebaseApp.initializeApp(getContext());``` inside your Application class ```onCreate()``` to also initialize your Firebase instance. The SDK will initialize it's own Firebase instance in it's process.
 
-Please ignore the push notifications addressed to the SDK in your receiver:
+When your ```FirebaseMessagingService``` will be called, you will also have to forward the information to the SDK package.
+Make sure to call ```LocartaSdk.handleMessage(remoteMessage)``` when you receive a new message from Firebase. This method will return a ```boolean``` that indicates if the message was handled by the SDK or not.
+Also call ```LocartaSdk.handleNewFcmToken(context)``` when a ```newToken()``` is received from Firebase.
+**NOTE: ```onNewToken()``` will be called with both SDK and your apps token, so in order to be sure you are using the right token, obtain it as in the example below:**
+
 
 ```java
 public class AppGcmListenerService extends FirebaseMessagingService {
@@ -128,11 +128,20 @@ public class AppGcmListenerService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         if (!LocartaSdk.handleMessage(remoteMessage)) {
-          // Normal push notification, your logic comes here
+            // normal push notification, your logic comes here
             Log.i("AppGcmListenerService", String.format("Received message %s", message));
         } else {
-          // just ignore this push notification, it is addressed to the SDK
+           // just ignore this push notification, it is addressed to the SDK
         }
+    }
+    
+    @Override
+    public void onNewToken(String newToken) {
+        super.onNewToken(s);
+        LocartaSdk.handleNewFcmToken(this.getApplicationContext());
+        // the new token might be addressed to the SDK, so make sure you retrieve the token for your Firebase instance
+        String appToken = Tasks.await(FirebaseInstanceId.getInstance().getInstanceId()).getToken();
+        // send the appToken to your backend
     }
 
 }
